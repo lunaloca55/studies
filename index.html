@@ -190,6 +190,1088 @@
     </div>
 </div>
 
+<!-- Gamification -->
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics Mastery Challenge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #003594 0%, #0047BB 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .game-header {
+            background: linear-gradient(135deg, #003594 0%, #0056CC 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .game-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .game-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px 30px;
+            background: #f5f5f5;
+            border-bottom: 3px solid #FFB81C;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #003594;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .game-mode-select {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .mode-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .mode-btn {
+            padding: 30px;
+            background: linear-gradient(135deg, #f0f8ff, #e3f2fd);
+            border: 3px solid #003594;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,53,148,0.3);
+            background: linear-gradient(135deg, #FFB81C, #FFA500);
+        }
+
+        .mode-btn h3 {
+            color: #003594;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .mode-btn p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .game-area {
+            display: none;
+            padding: 40px;
+        }
+
+        .game-area.active {
+            display: block;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, #f0f8ff, #ffffff);
+            border-left: 6px solid #003594;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #FFB81C;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 22px;
+            color: #003594;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .scenario-box {
+            background: #fffbea;
+            border-left: 4px solid #FFB81C;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 20px;
+            background: white;
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .option:hover {
+            border-color: #003594;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #003594;
+            background: #e3f2fd;
+        }
+
+        .option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .formula-input {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group label {
+            min-width: 150px;
+            font-weight: bold;
+            color: #003594;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #003594, #0056CC);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,53,148,0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            border-left: 6px solid #4caf50;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            border-left: 6px solid #f44336;
+        }
+
+        .feedback-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feedback.correct .feedback-title {
+            color: #4caf50;
+        }
+
+        .feedback.incorrect .feedback-title {
+            color: #f44336;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #FFB81C, #FFA500);
+            color: #003594;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFB81C, #FFA500);
+            transition: width 0.3s ease;
+        }
+
+        .results-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .score-circle .score {
+            font-size: 64px;
+            font-weight: bold;
+        }
+
+        .score-circle .label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .performance-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .perf-card {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+            border-top: 4px solid #003594;
+        }
+
+        .perf-card h4 {
+            color: #003594;
+            margin-bottom: 10px;
+        }
+
+        .perf-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFB81C;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #003594, #0056CC);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .leaderboard {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .leaderboard h3 {
+            color: #003594;
+            margin-bottom: 15px;
+        }
+
+        .leaderboard-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #FFB81C;
+        }
+
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFB81C;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFB81C, #FFA500);
+            color: #003594;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .match-game {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .match-column {
+            display: grid;
+            gap: 10px;
+        }
+
+        .match-item {
+            padding: 15px;
+            background: white;
+            border: 3px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .match-item:hover {
+            border-color: #003594;
+        }
+
+        .match-item.selected {
+            border-color: #FFB81C;
+            background: #fffbea;
+        }
+
+        .match-item.matched {
+            border-color: #4caf50;
+            background: #e8f5e9;
+            cursor: default;
+        }
+
+        @keyframes celebration {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .celebrate {
+            animation: celebration 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🎓 Metrics Mastery Challenge</h1>
+            <p>Test your knowledge of graduate enrollment metrics and definitions</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value" id="totalScore">0</div>
+                <div class="stat-label">Total Points</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="questionsAnswered">0</div>
+                <div class="stat-label">Questions Answered</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="accuracy">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="currentStreak">0</div>
+                <div class="stat-label">Current Streak 🔥</div>
+            </div>
+        </div>
+
+        <div class="game-mode-select" id="modeSelect">
+            <h2 style="color: #003594; margin-bottom: 20px;">Choose Your Challenge</h2>
+            <div class="mode-buttons">
+                <div class="mode-btn" onclick="startGame('quiz')">
+                    <h3>📝 Quiz Mode</h3>
+                    <p>Multiple choice questions testing definitions and concepts</p>
+                    <p style="margin-top: 10px; font-weight: bold;">10 Questions</p>
+                </div>
+                <div class="mode-btn" onclick="startGame('calculation')">
+                    <h3>🧮 Calculator Mode</h3>
+                    <p>Apply formulas to real scenarios and calculate metrics</p>
+                    <p style="margin-top: 10px; font-weight: bold;">5 Scenarios</p>
+                </div>
+                <div class="mode-btn" onclick="startGame('match')">
+                    <h3>🎯 Match Game</h3>
+                    <p>Match terms with their definitions as fast as you can</p>
+                    <p style="margin-top: 10px; font-weight: bold;">Timed Challenge</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area" id="gameArea"></div>
+    </div>
+
+    <script>
+        let currentMode = '';
+        let currentQuestion = 0;
+        let score = 0;
+        let questionsAnswered = 0;
+        let correctAnswers = 0;
+        let streak = 0;
+        let timer = null;
+        let startTime = 0;
+
+        const quizQuestions = [
+            {
+                question: "What does the Inquiry-to-Application Rate measure?",
+                options: [
+                    "The percentage of website visitors who submit an RFI",
+                    "The percentage of inquiries who submit an application",
+                    "The percentage of applications that are completed",
+                    "The percentage of admits who enroll"
+                ],
+                correct: 1,
+                explanation: "Inquiry-to-Application Rate measures how many people who submitted an RFI (inquiry) go on to submit an application. Industry benchmark: 13-18%."
+            },
+            {
+                question: "What is the benchmark range for Application Completion Rate?",
+                options: [
+                    "30-40%",
+                    "50-60%",
+                    "70-80%",
+                    "90-95%"
+                ],
+                correct: 1,
+                explanation: "Application Completion Rate should be 50-60%. This measures what percentage of started applications are actually submitted."
+            },
+            {
+                question: "What does 'Yield Rate' refer to?",
+                options: [
+                    "The return on marketing investment",
+                    "The percentage of inquiries who apply",
+                    "The percentage of admitted students who enroll",
+                    "The percentage of deposited students who matriculate"
+                ],
+                correct: 2,
+                explanation: "Yield Rate is the percentage of admitted students who choose to enroll. For graduate programs, typical yield is 60-70%."
+            },
+            {
+                question: "A 'Stealth Applicant' is:",
+                options: [
+                    "An applicant who doesn't want their employer to know",
+                    "An applicant who applies without previously submitting an inquiry",
+                    "An applicant using a fake name",
+                    "An applicant who withdraws their application"
+                ],
+                correct: 1,
+                explanation: "Stealth Applicants (or 'secret shoppers') apply without appearing in your inquiry/nurture funnel first. This affects conversion rate calculations."
+            },
+            {
+                question: "What is the ideal LTV:CAC ratio for a graduate program?",
+                options: [
+                    "1:1",
+                    "2:1",
+                    "5:1 or higher",
+                    "10:1 or higher"
+                ],
+                correct: 2,
+                explanation: "An LTV:CAC ratio of 5:1 or higher is ideal (minimum 3:1). This means for every $1 spent recruiting, you generate $5 in tuition revenue."
+            },
+            {
+                question: "What does 'Pipeline Velocity' measure?",
+                options: [
+                    "How much budget is spent per month",
+                    "How fast students move through the funnel stages",
+                    "The speed at which emails are sent",
+                    "How quickly decisions are made"
+                ],
+                correct: 1,
+                explanation: "Pipeline Velocity measures the average number of days it takes for prospects to move from one stage to the next. Goal: Optimized decline over time."
+            },
+            {
+                question: "What is 'Summer Melt'?",
+                options: [
+                    "Students who leave during the summer term",
+                    "Students who deposit but don't ultimately enroll",
+                    "A decrease in applications during summer months",
+                    "The melting of the enrollment ice cream social"
+                ],
+                correct: 1,
+                explanation: "Summer Melt refers to students who submit a deposit but don't complete enrollment. Target: Keep melt rate below 5% (95%+ deposit-to-enrollment rate)."
+            },
+            {
+                question: "In Salesforce, what does an 'Opportunity' track?",
+                options: [
+                    "Job opportunities for graduates",
+                    "Marketing campaign opportunities",
+                    "The recruiting and application pipeline for a prospective student",
+                    "Fundraising opportunities"
+                ],
+                correct: 2,
+                explanation: "An Opportunity in Salesforce tracks an individual student's journey through the recruitment pipeline from prospect to matriculation."
+            },
+            {
+                question: "What's the target benchmark for inquiry response time?",
+                options: [
+                    "Within 1 week",
+                    "Within 24 hours (ideally within 4 hours)",
+                    "Within 10 minutes",
+                    "Same business day"
+                ],
+                correct: 1,
+                explanation: "Target response time is within 24 hours, with 4 hours or less being ideal. Fast response times significantly improve conversion rates."
+            },
+            {
+                question: "What does a Marketing Cloud 'Journey' do?",
+                options: [
+                    "Tracks where students travel from",
+                    "Creates automated, personalized communication sequences",
+                    "Maps the physical journey to campus",
+                    "Reports on the student lifecycle"
+                ],
+                correct: 1,
+                explanation: "A Journey in Marketing Cloud creates automated, multi-step, personalized communication sequences based on student behaviors and attributes."
+            }
+        ];
+
+        const calculationQuestions = [
+            {
+                question: "Calculate the Inquiry-to-Application Rate",
+                scenario: "Your program received 800 inquiries last month. 136 of those inquiries submitted applications.",
+                inputs: [
+                    { label: "Number of Inquiries", id: "inquiries", value: 800 },
+                    { label: "Number of Applications", id: "applications", value: 136 }
+                ],
+                formula: "(Applications ÷ Inquiries) × 100",
+                answer: 17,
+                unit: "%",
+                tolerance: 0.5,
+                explanation: "Calculation: (136 ÷ 800) × 100 = 17%. This is within the healthy benchmark range of 13-18%."
+            },
+            {
+                question: "Calculate the Cost per Enrolled Student (CPE)",
+                scenario: "You spent $45,000 on recruitment and marketing last term. You enrolled 18 new students.",
+                inputs: [
+                    { label: "Total Marketing Spend", id: "spend", value: 45000 },
+                    { label: "Students Enrolled", id: "enrolled", value: 18 }
+                ],
+                formula: "Total Spend ÷ Students Enrolled",
+                answer: 2500,
+                unit: "$",
+                tolerance: 1,
+                explanation: "Calculation: $45,000 ÷ 18 = $2,500 per student. This is below the $2,850 industry average - good efficiency!"
+            },
+            {
+                question: "Calculate the Yield Rate",
+                scenario: "Your program admitted 75 students. 48 of them accepted the offer and deposited.",
+                inputs: [
+                    { label: "Students Admitted", id: "admits", value: 75 },
+                    { label: "Students Deposited", id: "deposits", value: 48 }
+                ],
+                formula: "(Deposits ÷ Admits) × 100",
+                answer: 64,
+                unit: "%",
+                tolerance: 0.5,
+                explanation: "Calculation: (48 ÷ 75) × 100 = 64%. This is within the healthy 60-70% benchmark range for graduate programs."
+            },
+            {
+                question: "Calculate the LTV:CAC Ratio",
+                scenario: "A student pays $42,000 in total tuition. It costs $3,500 to recruit and enroll them.",
+                inputs: [
+                    { label: "Lifetime Value (Tuition)", id: "ltv", value: 42000 },
+                    { label: "Customer Acquisition Cost", id: "cac", value: 3500 }
+                ],
+                formula: "LTV ÷ CAC",
+                answer: 12,
+                unit: ":1",
+                tolerance: 0.5,
+                explanation: "Calculation: $42,000 ÷ $3,500 = 12:1 ratio. Excellent! This is well above the 5:1 target. The program is highly profitable."
+            },
+            {
+                question: "Calculate Application Completion Rate",
+                scenario: "250 prospective students started your application. 145 actually completed and submitted it.",
+                inputs: [
+                    { label: "Applications Started", id: "started", value: 250 },
+                    { label: "Applications Completed", id: "completed", value: 145 }
+                ],
+                formula: "(Completed ÷ Started) × 100",
+                answer: 58,
+                unit: "%",
+                tolerance: 0.5,
+                explanation: "Calculation: (145 ÷ 250) × 100 = 58%. This is within the healthy 50-60% benchmark range."
+            }
+        ];
+
+        const matchPairs = [
+            { term: "RFI", definition: "Request for Information - form to capture prospect interest" },
+            { term: "Pipeline Velocity", definition: "Speed at which prospects move through funnel stages" },
+            { term: "CAC", definition: "Customer Acquisition Cost - total cost to enroll one student" },
+            { term: "Yield Rate", definition: "Percentage of admitted students who enroll" },
+            { term: "Stealth Applicant", definition: "Student who applies without previously submitting inquiry" },
+            { term: "Journey", definition: "Automated, personalized communication sequence" },
+            { term: "IER", definition: "Individual Email Result - email engagement record in Salesforce" },
+            { term: "Melt", definition: "Students who deposit but don't ultimately enroll" }
+        ];
+
+        function startGame(mode) {
+            currentMode = mode;
+            currentQuestion = 0;
+            document.getElementById('modeSelect').style.display = 'none';
+            document.getElementById('gameArea').classList.add('active');
+            
+            if (mode === 'quiz') {
+                showQuizQuestion();
+            } else if (mode === 'calculation') {
+                showCalculationQuestion();
+            } else if (mode === 'match') {
+                showMatchGame();
+            }
+        }
+
+        function showQuizQuestion() {
+            const q = quizQuestions[currentQuestion];
+            const progress = ((currentQuestion) / quizQuestions.length) * 100;
+            
+            const html = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="question-card">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${quizQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((opt, idx) => `
+                            <div class="option" onclick="selectOption(${idx})" id="option${idx}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer()" id="submitBtn" disabled>Submit Answer</button>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+            
+            document.getElementById('gameArea').innerHTML = html;
+        }
+
+        function selectOption(idx) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById(`option${idx}`).classList.add('selected');
+            document.getElementById('submitBtn').disabled = false;
+            window.selectedAnswer = idx;
+        }
+
+        function checkAnswer() {
+            const q = quizQuestions[currentQuestion];
+            const isCorrect = window.selectedAnswer === q.correct;
+            
+            document.querySelectorAll('.option').forEach((opt, idx) => {
+                opt.style.pointerEvents = 'none';
+                if (idx === q.correct) {
+                    opt.classList.add('correct');
+                } else if (idx === window.selectedAnswer && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = `
+                <div class="feedback-title">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div>
+                <p>${q.explanation}</p>
+                <button class="next-btn" onclick="nextQuestion()">
+                    ${currentQuestion < quizQuestions.length - 1 ? 'Next Question →' : 'See Results'}
+                </button>
+            `;
+            
+            document.getElementById('submitBtn').style.display = 'none';
+            
+            updateStats(isCorrect, 10);
+        }
+
+        function showCalculationQuestion() {
+            const q = calculationQuestions[currentQuestion];
+            const progress = ((currentQuestion) / calculationQuestions.length) * 100;
+            
+            const html = `
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="question-card">
+                    <div class="question-number">Scenario ${currentQuestion + 1} of ${calculationQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="scenario-box">
+                        <strong>Scenario:</strong> ${q.scenario}
+                    </div>
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <strong>Formula:</strong> <code>${q.formula}</code>
+                    </div>
+                    <div class="formula-input">
+                        ${q.inputs.map(input => `
+                            <div class="input-group">
+                                <label>${input.label}:</label>
+                                <input type="number" id="${input.id}" value="${input.value}" readonly style="background: #f5f5f5;">
+                            </div>
+                        `).join('')}
+                        <div class="input-group">
+                            <label>Your Answer:</label>
+                            <input type="number" id="answerInput" placeholder="Enter your calculation" step="0.01">
+                        </div>
+                    </div>
+                    <button class="submit-btn" onclick="checkCalculation()">Calculate & Submit</button>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+            `;
+            
+            document.getElementById('gameArea').innerHTML = html;
+        }
+
+        function checkCalculation() {
+            const q = calculationQuestions[currentQuestion];
+            const userAnswer = parseFloat(document.getElementById('answerInput').value);
+            const isCorrect = Math.abs(userAnswer - q.answer) <= q.tolerance;
+            
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = `
+                <div class="feedback-title">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div>
+                <p><strong>Your answer:</strong> ${userAnswer}${q.unit}</p>
+                <p><strong>Correct answer:</strong> ${q.answer}${q.unit}</p>
+                <p>${q.explanation}</p>
+                <button class="next-btn" onclick="nextCalculation()">
+                    ${currentQuestion < calculationQuestions.length - 1 ? 'Next Scenario →' : 'See Results'}
+                </button>
+            `;
+            
+            updateStats(isCorrect, 20);
+        }
+
+        function showMatchGame() {
+            startTime = Date.now();
+            const shuffledTerms = [...matchPairs].sort(() => Math.random() - 0.5);
+            const shuffledDefs = [...matchPairs].sort(() => Math.random() - 0.5);
+            
+            const html = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: #003594;">Match the Terms with Definitions</h2>
+                    <p style="color: #666;">Click a term, then click its matching definition</p>
+                    <div class="timer" id="timer">Time: 0s</div>
+                </div>
+                <div class="match-game">
+                    <div class="match-column">
+                        <h3 style="color: #003594; text-align: center;">Terms</h3>
+                        ${shuffledTerms.map((pair, idx) => `
+                            <div class="match-item" onclick="selectMatch('term', ${idx}, '${pair.term}')" id="term${idx}">
+                                ${pair.term}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="match-column">
+                        <h3 style="color: #003594; text-align: center;">Definitions</h3>
+                        ${shuffledDefs.map((pair, idx) => `
+                            <div class="match-item" onclick="selectMatch('def', ${idx}, '${pair.term}')" id="def${idx}">
+                                ${pair.definition}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="feedback" id="matchFeedback"></div>
+            `;
+            
+            document.getElementById('gameArea').innerHTML = html;
+            
+            timer = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById('timer').textContent = `Time: ${elapsed}s`;
+            }, 1000);
+        }
+
+        let selectedTerm = null;
+        let selectedDef = null;
+        let matchedPairs = 0;
+
+        function selectMatch(type, idx, term) {
+            const element = document.getElementById(`${type}${idx}`);
+            
+            if (element.classList.contains('matched')) return;
+            
+            if (type === 'term') {
+                if (selectedTerm !== null) {
+                    document.getElementById(`term${selectedTerm.idx}`).classList.remove('selected');
+                }
+                selectedTerm = { idx, term };
+                element.classList.add('selected');
+            } else {
+                if (selectedDef !== null) {
+                    document.getElementById(`def${selectedDef.idx}`).classList.remove('selected');
+                }
+                selectedDef = { idx, term };
+                element.classList.add('selected');
+            }
+            
+            if (selectedTerm && selectedDef) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const isMatch = selectedTerm.term === selectedDef.term;
+            
+            if (isMatch) {
+                document.getElementById(`term${selectedTerm.idx}`).classList.add('matched');
+                document.getElementById(`def${selectedDef.idx}`).classList.add('matched');
+                matchedPairs++;
+                
+                updateStats(true, 15);
+                
+                if (matchedPairs === matchPairs.length) {
+                    clearInterval(timer);
+                    const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+                    showMatchResults(timeElapsed);
+                }
+            } else {
+                const termEl = document.getElementById(`term${selectedTerm.idx}`);
+                const defEl = document.getElementById(`def${selectedDef.idx}`);
+                
+                termEl.style.background = '#ffebee';
+                defEl.style.background = '#ffebee';
+                
+                setTimeout(() => {
+                    termEl.style.background = '';
+                    defEl.style.background = '';
+                    termEl.classList.remove('selected');
+                    defEl.classList.remove('selected');
+                }, 500);
+                
+                updateStats(false, 0);
+            }
+            
+            selectedTerm = null;
+            selectedDef = null;
+        }
+
+        function showMatchResults(timeElapsed) {
+            const bonus = timeElapsed < 30 ? 50 : timeElapsed < 60 ? 25 : 0;
+            score += bonus;
+            
+            document.getElementById('gameArea').innerHTML = `
+                <div class="results-screen">
+                    <h2 style="color: #003594; font-size: 36px;">🎉 All Matched!</h2>
+                    <div class="score-circle">
+                        <div class="score">${timeElapsed}s</div>
+                        <div class="label">Completion Time</div>
+                    </div>
+                    <div class="performance-breakdown">
+                        <div class="perf-card">
+                            <h4>Total Matches</h4>
+                            <div class="value">${matchPairs.length}</div>
+                        </div>
+                        <div class="perf-card">
+                            <h4>Time Bonus</h4>
+                            <div class="value">+${bonus}</div>
+                        </div>
+                        <div class="perf-card">
+                            <h4>Final Score</h4>
+                            <div class="value">${score}</div>
+                        </div>
+                    </div>
+                    <button class="restart-btn" onclick="location.reload()">Play Again</button>
+                    <button class="restart-btn" style="background: linear-gradient(135deg, #FFB81C, #FFA500); color: #003594;" onclick="showModeSelect()">Choose Different Mode</button>
+                </div>
+            `;
+            
+            updateStatsDisplay();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizQuestions.length) {
+                showQuizQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function nextCalculation() {
+            currentQuestion++;
+            if (currentQuestion < calculationQuestions.length) {
+                showCalculationQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const percentage = Math.round((correctAnswers / questionsAnswered) * 100);
+            const totalQuestions = currentMode === 'quiz' ? quizQuestions.length : calculationQuestions.length;
+            
+            let performanceMessage = '';
+            let circleColor = '';
+            
+            if (percentage >= 90) {
+                performanceMessage = '🌟 Outstanding! You\'re a metrics master!';
+                circleColor = 'linear-gradient(135deg, #4caf50, #8bc34a)';
+            } else if (percentage >= 70) {
+                performanceMessage = '👍 Great job! You have a solid understanding!';
+                circleColor = 'linear-gradient(135deg, #2196f3, #64b5f6)';
+            } else if (percentage >= 50) {
+                performanceMessage = '📚 Good start! Review the concepts and try again.';
+                circleColor = 'linear-gradient(135deg, #ff9800, #ffb74d)';
+            } else {
+                performanceMessage = '💪 Keep learning! Practice makes perfect.';
+                circleColor = 'linear-gradient(135deg, #f44336, #e57373)';
+            }
+            
+            document.getElementById('gameArea').innerHTML = `
+                <div class="results-screen">
+                    <h2 style="color: #003594; font-size: 36px;">Quiz Complete!</h2>
+                    <div class="score-circle" style="background: ${circleColor}">
+                        <div class="score">${percentage}%</div>
+                        <div class="label">Accuracy</div>
+                    </div>
+                    <p style="font-size: 24px; color: #003594; margin: 20px 0;">${performanceMessage}</p>
+                    <div class="performance-breakdown">
+                        <div class="perf-card">
+                            <h4>Correct Answers</h4>
+                            <div class="value">${correctAnswers}/${totalQuestions}</div>
+                        </div>
+                        <div class="perf-card">
+                            <h4>Total Points</h4>
+                            <div class="value">${score}</div>
+                        </div>
+                        <div class="perf-card">
+                            <h4>Best Streak</h4>
+                            <div class="value">${Math.max(...streakHistory)}</div>
+                        </div>
+                    </div>
+                    <button class="restart-btn" onclick="location.reload()">Play Again</button>
+                    <button class="restart-btn" style="background: linear-gradient(135deg, #FFB81C, #FFA500); color: #003594;" onclick="showModeSelect()">Try Different Mode</button>
+                </div>
+            `;
+        }
+
+        function showModeSelect() {
+            document.getElementById('modeSelect').style.display = 'block';
+            document.getElementById('gameArea').classList.remove('active');
+            document.getElementById('gameArea').innerHTML = '';
+        }
+
+        let streakHistory = [0];
+
+        function updateStats(isCorrect, points) {
+            questionsAnswered++;
+            if (isCorrect) {
+                correctAnswers++;
+                score += points;
+                streak++;
+                if (streak > 2) {
+                    score += streak * 2; // Bonus points for streaks
+                }
+            } else {
+                streak = 0;
+            }
+            
+            streakHistory.push(streak);
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('totalScore').textContent = score;
+            document.getElementById('questionsAnswered').textContent = questionsAnswered;
+            document.getElementById('accuracy').textContent = 
+                questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) + '%' : '0%';
+            document.getElementById('currentStreak').textContent = streak;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+    
 <!-- PAGE 2: TABLE OF CONTENTS -->
 <div class="page-break">
     <h1>Quick Reference Guide</h1>
