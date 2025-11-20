@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduate Enrollment Metrics Quick Reference</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+            background: white;
+        }
+        
+        @media print {
+            body {
+                padding: 0.5in;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+        }
+        
+        h1 {
+            color: #003594;
+            border-bottom: 4px solid #FFB81C;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #003594;
+            border-bottom: 2px solid #003594;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        h3 {
+            color: #003594;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        h4 {
+            color: #333;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .cover-page {
+            text-align: center;
+            padding-top: 3in;
+        }
+        
+        .cover-page h1 {
+            font-size: 36px;
+            border: none;
+            margin-bottom: 20px;
+        }
+        
+        .cover-page .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        
+        .cover-page .meta {
+            font-size: 14px;
+            color: #999;
+            margin-top: 60px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        th {
+            background-color: #003594;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .metric-box {
+            background: #f0f8ff;
+            border-left: 4px solid #003594;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .formula {
+            background: #fffbea;
+            border-left: 4px solid #FFB81C;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .benchmark {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .key-point {
+            background: #FFB81C;
+            color: #003594;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .definition-term {
+            font-weight: bold;
+            color: #003594;
+            font-size: 16px;
+        }
+        
+        .toc {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="cover-page page-break">
+    <h1>Graduate Enrollment Metrics</h1>
+    <div class="subtitle">Quick Reference Guide</div>
+    <p style="font-size: 18px; color: #003594; margin: 40px 0;">
+        Cross-Funnel KPIs, Essential Definitions & Core Tools<br>
+        for the Student Journey
+    </p>
+    <div class="meta">
+        University of Pittsburgh Graduate Studies<br>
+        Version 1.0 | November 2025<br>
+        20-Page Condensed Edition
+    </div>
+</div>
+
+<!-- PAGE 2: TABLE OF CONTENTS -->
+<div class="page-break">
+    <h1>Quick Reference Guide</h1>
+    <div class="toc">
+        <h3>Contents</h3>
+        <ul>
+            <li><strong>Section 1:</strong> The Graduate Enrollment Funnel (Pages 3-4)</li>
+            <li><strong>Section 2:</strong> Cross-Funnel KPIs (Pages 5-10)</li>
+            <li><strong>Section 3:</strong> Essential Terminology (Pages 11-14)</li>
+            <li><strong>Section 4:</strong> Core Technology Tools (Pages 15-16)</li>
+            <li><strong>Section 5:</strong> Benchmarks & Targets (Pages 17-18)</li>
+            <li><strong>Section 6:</strong> Quick Start Guide (Pages 19-20)</li>
+        </ul>
+    </div>
+    
+    <h3>How to Use This Guide</h3>
+    <p>This condensed guide focuses on the most critical metrics and definitions you need to manage graduate enrollment effectively. Use it as:</p>
+    <ul>
+        <li><strong>Daily Reference:</strong> Quick lookup for metric definitions and formulas</li>
+        <li><strong>Training Tool:</strong> Onboarding new team members</li>
+        <li><strong>Meeting Resource:</strong> Have data definitions at your fingertips</li>
+        <li><strong>Decision Support:</strong> Reference benchmarks when making strategic decisions</li>
+    </ul>
+</div>
+
+<!-- PAGE 3: THE FUNNEL -->
+<div class="page-break">
+    <h1>Section 1: The Graduate Enrollment Funnel</h1>
+    
+    <h2>Overview</h2>
+    <p>The graduate enrollment funnel represents the journey from first awareness to matriculation. Understanding each stage and the conversion points between them is essential for managing enrollment effectively.</p>
+    
+    <h3>The Seven Stages</h3>
+    
+    <table>
+        <tr>
+            <th>Stage</th>
+            <th>Definition</th>
+            <th>Key Actions</th>
+        </tr>
+        <tr>
+            <td><strong>1. Awareness</strong></td>
+            <td>Potential students become aware of your programs</td>
+            <td>Advertising, SEO, events, brand building</td>
+        </tr>
+        <tr>
+            <td><strong>2. Interest</strong></td>
+            <td>Prospects submit RFI or request information</td>
+            <td>Landing pages, email nurture, webinars</td>
+        </tr>
+        <tr>
+            <td><strong>3. Consideration</strong></td>
+            <td>Active evaluation and comparison of options</td>
+            <td>Counselor outreach, campus visits, testimonials</td>
+        </tr>
+        <tr>
+            <td><strong>4. Application</strong></td>
+            <td>Prospects start and submit applications</td>
+            <td>Application support, reminders, technical help</td>
+        </tr>
+        <tr>
+            <td><strong>5. Decision</strong></td>
+            <td>Review, admit, and present offers</td>
+            <td>Timely decisions, financial aid, yield campaigns</td>
+        </tr>
+        <tr>
+            <td><strong>6. Enrollment</strong></td>
+            <td>Admits accept offers and complete enrollment</td>
+            <td>Deposits, registration, orientation, melt prevention</td>
+        </tr>
+        <tr>
+            <td><strong>7. Post-Enrollment</strong></td>
+            <td>Students begin program and persist to completion</td>
+            <td>Retention support, advising, engagement</td>
+        </tr>
+    </table>
+    
+    <h3>Sample Funnel Flow</h3>
+    <div class="metric-box">
+        <strong>Typical Graduate Program Example:</strong>
+        <ul style="list-style: none; padding-left: 0;">
+            <li>→ <strong>10,000 Prospects</strong> (website visitors, ad impressions)</li>
+            <li>→ <strong>1,000 Inquiries</strong> (10% conversion - RFI submissions)</li>
+            <li>→ <strong>150 Applicants</strong> (15% conversion - started applications)</li>
+            <li>→ <strong>90 Completed Apps</strong> (60% completion rate)</li>
+            <li>→ <strong>60 Admits</strong> (67% admit rate)</li>
+            <li>→ <strong>40 Deposits</strong> (67% yield rate)</li>
+            <li>→ <strong>38 Enrolled</strong> (95% matriculation rate)</li>
+        </ul>
+        <p><span class="key-point">Overall Win Rate: 3.8%</span> (38 enrolled ÷ 1,000 inquiries)</p>
+    </div>
+</div>
+
+<!-- PAGE 4: FUNNEL CONTINUED -->
+<div class="page-break">
+    <h2>Critical Conversion Points</h2>
+    
+    <p>Six key conversion points determine your enrollment success:</p>
+    
+    <table>
+        <tr>
+            <th>Conversion Point</th>
+            <th>Typical Rate</th>
+            <th>What Drives It</th>
+        </tr>
+        <tr>
+            <td><strong>Prospect → Inquiry</strong></td>
+            <td>8-12%</td>
+            <td>Brand strength, targeting quality, value proposition clarity</td>
+        </tr>
+        <tr>
+            <td><strong>Inquiry → Application</strong></td>
+            <td>13-18%</td>
+            <td>Nurture effectiveness, counselor outreach, program fit</td>
+        </tr>
+        <tr>
+            <td><strong>Started → Completed App</strong></td>
+            <td>50-60%</td>
+            <td>Application simplicity, support availability, urgency</td>
+        </tr>
+        <tr>
+            <td><strong>Completed → Admit</strong></td>
+            <td>60-70%</td>
+            <td>Program selectivity, applicant quality, standards</td>
+        </tr>
+        <tr>
+            <td><strong>Admit → Deposit</strong></td>
+            <td>60-70%</td>
+            <td>Financial aid competitiveness, yield campaigns, fit</td>
+        </tr>
+        <tr>
+            <td><strong>Deposit → Enrolled</strong></td>
+            <td>95%+</td>
+            <td>Communication frequency, melt prevention, engagement</td>
+        </tr>
+    </table>
+    
+    <h3>Why This Matters</h3>
+    <div class="metric-box">
+        <p><strong>Small improvements = Big results</strong></p>
+        <p>Example: Improving inquiry→application from 15% to 17% (just 2 percentage points):</p>
+        <ul>
+            <li>1,000 inquiries × 15% = 150 applicants (baseline)</li>
+            <li>1,000 inquiries × 17% = 170 applicants (improved)</li>
+            <li>20 additional applicants × 3.8% overall win rate = <strong>~1 additional enrolled student</strong></li>
+        </ul>
+        <p>Across 10 programs, that's 10 more students = significant revenue impact.</p>
+    </div>
+</div>
+
+<!-- PAGE 5: CROSS-FUNNEL KPIs -->
+<div class="page-break">
+    <h1>Section 2: Cross-Funnel KPIs</h1>
+    
+    <p>These six metrics span multiple funnel stages and provide the most comprehensive view of enrollment performance.</p>
+    
+    <h2>KPI #1: Funnel Conversion Rate</h2>
+    
+    <div class="definition-term">Definition</div>
+    <p>The percentage of prospects who advance from one funnel stage to the next.</p>
+    
+    <div class="formula">
+        Formula: (Number Advanced to Next Stage ÷ Number in Current Stage) × 100
+    </div>
+    
+    <h4>Key Conversion Metrics to Track:</h4>
+    <ul>
+        <li><strong>Inquiry-to-Application Rate:</strong> (Applicants ÷ Inquiries) × 100</li>
+        <li><strong>Application Completion Rate:</strong> (Completed ÷ Started) × 100</li>
+        <li><strong>Offer-to-Deposit Yield:</strong> (Deposits ÷ Admits) × 100</li>
+        <li><strong>Overall Win Rate:</strong> (Enrolled ÷ Applicants) × 100</li>
+    </ul>
+    
+    <div class="benchmark">
+        <strong>Benchmarks:</strong>
+        <ul>
+            <li>Inquiry → Application: 13-18%</li>
+            <li>Application Completion: 50-60%</li>
+            <li>Offer → Deposit: 60-70%</li>
+            <li>Overall Win Rate: 3-4%</li>
+        </ul>
+    </div>
+    
+    <h4>Daily Use Cases:</h4>
+    <ol>
+        <li><strong>Weekly Monitoring:</strong> Check each Monday to spot trends before they become problems</li>
+        <li><strong>Program Comparison:</strong> Identify which programs are over/underperforming</li>
+        <li><strong>Goal Setting:</strong> Establish realistic improvement targets for each stage</li>
+        <li><strong>Forecasting:</strong> Predict enrollment based on current pipeline and historical rates</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Example:</strong> You have 500 admits and need 100 enrolled students. Historical yield shows 65% deposit and 95% matriculate.
+        <ul>
+            <li>Expected deposits: 500 × 0.65 = 325</li>
+            <li>Expected enrolled: 325 × 0.95 = 309</li>
+            <li><span class="key-point">Result: You'll exceed your goal by 209 students</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 6: KPI #2 -->
+<div class="page-break">
+    <h2>KPI #2: Days Between Stages (Pipeline Velocity)</h2>
+    
+    <div class="definition-term">Definition</div>
+    <p>The average number of days it takes for a prospect to move from one stage to the next.</p>
+    
+    <div class="formula">
+        Formula: Average (Date Entered Next Stage - Date Entered Current Stage)
+    </div>
+    
+    <h4>Critical Timeframes to Track:</h4>
+    <ul>
+        <li><strong>Inquiry → Application:</strong> How long it takes interested prospects to apply</li>
+        <li><strong>Application Started → Completed:</strong> How long applications sit incomplete</li>
+        <li><strong>Application Completed → Decision:</strong> Your decision turnaround time</li>
+        <li><strong>Admit → Deposit:</strong> How long admits take to commit</li>
+    </ul>
+    
+    <div class="benchmark">
+        <strong>Benchmarks:</strong>
+        <ul>
+            <li>Inquiry → Application: ≤ 30 days</li>
+            <li>Application → Decision: < 14 days</li>
+            <li>Admit → Deposit: Varies by deadline structure</li>
+        </ul>
+        <p><strong>Goal:</strong> Optimized decline over time (faster movement = better)</p>
+    </div>
+    
+    <h4>Daily Use Cases:</h4>
+    <ol>
+        <li><strong>Identify Stalled Prospects:</strong> Pull list of inquiries 30+ days old who haven't applied for targeted outreach</li>
+        <li><strong>Optimize Nurture Timing:</strong> Set email campaign intervals based on average conversion time</li>
+        <li><strong>Resource Planning:</strong> Predict when application volume will hit based on inquiry timing</li>
+        <li><strong>Bottleneck Detection:</strong> If velocity suddenly slows, investigate the cause immediately</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Example:</strong> Your inquiry→application velocity is 45 days (15 days over target). You have 200 inquiries from the past 30 days.
+        <ul>
+            <li>Action: Launch immediate re-engagement campaign to these 200 prospects</li>
+            <li>Include: Deadline reminder, application tips, counselor office hours</li>
+            <li><span class="key-point">Impact: Even 10% response = 20 additional applications</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 7: KPI #3 -->
+<div class="page-break">
+    <h2>KPI #3: Cost per Stage Transition</h2>
+    
+    <div class="definition-term">Definition</div>
+    <p>The total marketing and recruitment expenditure required to move one student from one stage to the next.</p>
+    
+    <div class="formula">
+        Formula: Total Stage Marketing Spend ÷ Number of Stage Transitions
+    </div>
+    
+    <h4>Key Cost Metrics:</h4>
+    <ul>
+        <li><strong>Cost per Lead (CPL):</strong> Marketing spend ÷ Number of inquiries</li>
+        <li><strong>Cost per Applicant:</strong> Total recruitment spend ÷ Number of applicants</li>
+        <li><strong>Cost per Enrolled Student (CPE):</strong> Total spend ÷ Number enrolled</li>
+    </ul>
+    
+    <div class="benchmark">
+        <strong>Industry Benchmarks (Graduate Programs):</strong>
+        <ul>
+            <li>Cost per Inquiry: $140 average (varies widely by channel)</li>
+            <li>Cost per Enrolled Student: $2,850 average</li>
+        </ul>
+        <p><strong>Goal:</strong> Downward trend over time (improved efficiency)</p>
+    </div>
+    
+    <h4>Daily Use Cases:</h4>
+    <ol>
+        <li><strong>Channel Budget Allocation:</strong> Shift spend from high-cost to low-cost channels</li>
+        <li><strong>Campaign ROI Calculation:</strong> Determine if a campaign was worth the investment</li>
+        <li><strong>Leadership Reporting:</strong> Prove marketing efficiency and justify budget requests</li>
+        <li><strong>Program Profitability:</strong> Compare cost-to-recruit across programs</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Example:</strong> You're deciding between two marketing channels:
+        <table style="margin-top: 10px;">
+            <tr>
+                <th>Channel</th>
+                <th>Spend</th>
+                <th>Inquiries</th>
+                <th>CPL</th>
+                <th>Applications</th>
+                <th>Cost/App</th>
+            </tr>
+            <tr>
+                <td>Google Ads</td>
+                <td>$10,000</td>
+                <td>100</td>
+                <td>$100</td>
+                <td>17</td>
+                <td>$588</td>
+            </tr>
+            <tr>
+                <td>Facebook Ads</td>
+                <td>$10,000</td>
+                <td>80</td>
+                <td>$125</td>
+                <td>7</td>
+                <td>$1,429</td>
+            </tr>
+        </table>
+        <p><span class="key-point">Decision: Shift budget to Google Ads (59% lower cost per applicant)</span></p>
+    </div>
+</div>
+
+<!-- PAGE 8: KPI #4 -->
+<div class="page-break">
+    <h2>KPI #4: LTV:CAC Ratio</h2>
+    
+    <div class="definition-term">Definition</div>
+    <p>The ratio of Lifetime Value (total revenue from a student) to Customer Acquisition Cost (total cost to recruit and enroll them).</p>
+    
+    <div class="formula">
+        LTV:CAC Ratio = Lifetime Value ÷ Customer Acquisition Cost
+    </div>
+    
+    <h4>Components:</h4>
+    <p><strong>Lifetime Value (LTV):</strong></p>
+    <ul>
+        <li>Total tuition paid over entire program</li>
+        <li>Fees and other revenue</li>
+        <li>Additional programs (certificates, second degrees)</li>
+    </ul>
+    
+    <p><strong>Customer Acquisition Cost (CAC):</strong></p>
+    <ul>
+        <li>Marketing and advertising spend</li>
+        <li>Recruitment staff salaries (proportional)</li>
+        <li>Events, travel, materials</li>
+        <li>Technology costs</li>
+        <li>Yield activities</li>
+    </ul>
+    
+    <div class="benchmark">
+        <strong>Target Ratios:</strong>
+        <ul>
+            <li><strong>Minimum:</strong> 3:1 (earn $3 for every $1 spent)</li>
+            <li><strong>Healthy:</strong> 5:1</li>
+            <li><strong>Excellent:</strong> 7:1 or higher</li>
+        </ul>
+        <p><strong>Warning:</strong> Below 3:1 indicates unsustainable recruitment costs</p>
+    </div>
+    
+    <h4>Daily Use Cases:</h4>
+    <ol>
+        <li><strong>Program Investment Decisions:</strong> Which programs warrant increased marketing spend?</li>
+        <li><strong>Leadership Justification:</strong> Prove marketing ROI with clear revenue data</li>
+        <li><strong>Portfolio Management:</strong> Compare profitability across entire program portfolio</li>
+        <li><strong>Strategic Planning:</strong> Identify programs for growth vs. maintenance</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Example: MBA Program</strong>
+        <ul>
+            <li>Tuition: $60,000 total program</li>
+            <li>Recruitment Cost: $3,500 per student</li>
+            <li>LTV:CAC = $60,000 ÷ $3,500 = <span class="key-point">17:1 ratio</span></li>
+            <li><strong>Interpretation:</strong> Highly profitable; consider increasing marketing investment</li>
+        </ul>
+        
+        <strong>Example: MPA Program</strong>
+        <ul>
+            <li>Tuition: $35,000 total program</li>
+            <li>Recruitment Cost: $4,200 per student</li>
+            <li>LTV:CAC = $35,000 ÷ $4,200 = <span class="key-point">8.3:1 ratio</span></li>
+            <li><strong>Interpretation:</strong> Healthy but room for efficiency gains</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 9: KPI #5 -->
+<div class="page-break">
+    <h2>KPI #5: Lead Quality by Channel</h2>
+    
+    <div class="definition-term">Definition</div>
+    <p>A measure of how effectively each marketing channel generates leads that convert deeper into the funnel and ultimately enroll.</p>
+    
+    <div class="formula">
+        Quality Score = (Conversion Rate × Volume) ÷ Cost
+    </div>
+    
+    <h4>Metrics to Track by Channel:</h4>
+    <ul>
+        <li><strong>Inquiry Volume:</strong> Raw number of leads generated</li>
+        <li><strong>Inquiry-to-Application Rate:</strong> What % actually apply?</li>
+        <li><strong>Application-to-Enrollment Rate:</strong> What % enroll?</li>
+        <li><strong>Cost per Inquiry:</strong> Spend ÷ Inquiries</li>
+        <li><strong>Cost per Enrolled Student:</strong> Total cost to final enrollment</li>
+    </ul>
+    
+    <h4>Common Channels to Compare:</h4>
+    <table>
+        <tr>
+            <th>Channel</th>
+            <th>Typical Use</th>
+            <th>Quality Indicator</th>
+        </tr>
+        <tr>
+            <td>Organic Search</td>
+            <td>High-intent prospects</td>
+            <td>Usually highest conversion rates</td>
+        </tr>
+        <tr>
+            <td>Paid Search</td>
+            <td>Targeted keywords</td>
+            <td>High quality if targeting is right</td>
+        </tr>
+        <tr>
+            <td>Social Media (Paid)</td>
+            <td>Awareness and retargeting</td>
+            <td>Variable; test continuously</td>
+        </tr>
+        <tr>
+            <td>Email Campaigns</td>
+            <td>Nurture and conversion</td>
+            <td>High for engaged lists</td>
+        </tr>
+        <tr>
+            <td>Events/Fairs</td>
+            <td>In-person connection</td>
+            <td>Lower volume, higher quality</td>
+        </tr>
+        <tr>
+            <td>Referrals</td>
+            <td>Alumni/faculty recommendations</td>
+            <td>Typically highest quality</td>
+        </tr>
+    </table>
+    
+    <h4>Daily Use Cases:</h4>
+    <ol>
+        <li><strong>Budget Reallocation:</strong> Shift spend from low to high-performing channels weekly</li>
+        <li><strong>Targeting Optimization:</strong> Refine underperforming channels rather than abandon them</li>
+        <li><strong>Forecasting:</strong> Predict downstream results based on channel mix</li>
+        <li><strong>Testing:</strong> Run A/B tests on messaging by channel</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Example Analysis:</strong>
+        <table style="margin-top: 10px; font-size: 12px;">
+            <tr>
+                <th>Channel</th>
+                <th>Inquiries</th>
+                <th>Applied</th>
+                <th>Conv %</th>
+                <th>Enrolled</th>
+                <th>Decision</th>
+            </tr>
+            <tr style="background-color: #e8f5e9;">
+                <td><strong>Organic Search</strong></td>
+                <td>200</td>
+                <td>45</td>
+                <td>22.5%</td>
+                <td>8</td>
+                <td>✓ Maintain investment</td>
+            </tr>
+            <tr style="background-color: #fff3e0;">
+                <td><strong>Facebook</strong></td>
+                <td>500</td>
+                <td>35</td>
+                <td>7%</td>
+                <td>4</td>
+                <td>⚠ Optimize or reduce</td>
+            </tr>
+            <tr style="background-color: #e8f5e9;">
+                <td><strong>Referrals</strong></td>
+                <td>50</td>
+                <td>18</td>
+                <td>36%</td>
+                <td>5</td>
+                <td>✓ Encourage more</td>
+            </tr>
+        </table>
+        <p><span class="key-point">Action: Invest in referral program, optimize Facebook targeting, maintain organic SEO</span></p>
+    </div>
+</div>
+
+<!-- PAGE 10: KPI #6 -->
+<div class="page-break">
+    <h2>KPI #6: Source-to-Enrollment Attribution</h2>
+    
+    <div class="definition-term">Definition</div>
+    <p>Full-funnel tracking that connects each enrolled student back to their original marketing source and tracks all touchpoints along their journey.</p>
+    
+    <h4>UTM Parameters to Track:</h4>
+    <ul>
+        <li><strong>utm_source:</strong> Where traffic came from (google, facebook, email)</li>
+        <li><strong>utm_medium:</strong> How they arrived (cpc, social, email, referral)</li>
+        <li><strong>utm_campaign:</strong> Specific campaign name</li>
+        <li><strong>utm_content:</strong> Specific ad or content piece</li>
+        <li><strong>utm_term:</strong> Keyword (for paid search)</li>
+    </ul>
+    
+    <h4>Attribution Models:</h4>
+    <table>
+        <tr>
+            <th>Model</th>
+            <th>Credit Assignment</th>
+            <th>Best For</th>
+        </tr>
+        <tr>
+            <td><strong>First-Touch</strong></td>
+            <td>100% credit to first interaction</td>
+            <td>Understanding awareness channels</td>
+        </tr>
+        <tr>
+            <td><strong>Last-Touch</strong></td>
+            <td>100% credit to last interaction before conversion</td>
+            <td>Understanding conversion drivers</td>
+        </tr>
+        <tr>
+            <td><strong>Multi-Touch</strong></td>
+            <td>Equal credit across all touchpoints</td>
+            <td>Comprehensive journey view</td>
+        </tr>
+        <tr>
+            <td><strong>Time-Decay</strong></td>
+            <td>More credit to recent interactions</td>
+            <td>Balanced view with recency bias</td>
+        </tr>
+    </table>
+    
+    <h4>Daily Use Cases:</h4>
+    <ol>
+        <li><strong>Complete Journey Mapping:</strong> Understand full path from awareness to enrollment</li>
+        <li><strong>Early Funnel Investment:</strong> Justify spend on awareness activities that don't directly convert</li>
+        <li><strong>Channel Interaction:</strong> See how channels work together (e.g., Google → Email → Event)</li>
+        <li><strong>Strategic Optimization:</strong> Optimize entire recruitment strategy, not just last touch</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Example Journey:</strong>
+        <ol>
+            <li><strong>Day 1:</strong> Student clicks Facebook ad → Views program page</li>
+            <li><strong>Day 7:</strong> Returns via Google search → Downloads brochure</li>
+            <li><strong>Day 14:</strong> Receives email → Registers for webinar</li>
+            <li><strong>Day 21:</strong> Attends webinar → Submits RFI</li>
+            <li><strong>Day 45:</strong> Email nurture sequence → Starts application</li>
+            <li><strong>Day 52:</strong> Counselor call → Completes application</li>
+            <li><strong>Day 80:</strong> Admitted → Accepts offer</li>
+        </ol>
+        <p><span class="key-point">Attribution: Facebook initiated, Email nurtured, Webinar converted</span></p>
+        <p>Without full attribution, you might only credit the counselor call, missing the importance of Facebook and webinars.</p>
+    </div>
+</div>
+
+<!-- PAGE 11: ESSENTIAL TERMINOLOGY -->
+<div class="page-break">
+    <h1>Section 3: Essential Terminology</h1>
+    
+    <h2>Student Journey Terms</h2>
+    
+    <table>
+        <tr>
+            <th>Term</th>
+            <th>Definition</th>
+        </tr>
+        <tr>
+            <td><strong>Applicant</strong></td>
+            <td>A person who has submitted an application for admission</td>
+        </tr>
+        <tr>
+            <td><strong>Admit</strong></td>
+            <td>An applicant who has been offered admission</td>
+        </tr>
+        <tr>
+            <td><strong>Deposit</strong></td>
+            <td>Financial commitment indicating intent to enroll</td>
+        </tr>
+        <tr>
+            <td><strong>Enrollment</strong></td>
+            <td>The process where admitted students officially register and commit to attending</td>
+        </tr>
+        <tr>
+            <td><strong>Inquiry / Lead</strong></td>
+            <td>A prospective student who has expressed interest (typically via RFI)</td>
+        </tr>
+        <tr>
+            <td><strong>Matriculation</strong></td>
+            <td>The formal process of entering as a student (beginning classes)</td>
+        </tr>
+        <tr>
+            <td><strong>Prospect</strong></td>
+            <td>Potential student in early awareness stage</td>
+        </tr>
+        <tr>
+            <td><strong>RFI</strong></td>
+            <td>Request for Information - form to capture prospect interest</td>
+        </tr>
+        <tr>
+            <td><strong>Stealth Applicant</strong></td>
+            <td>Student who applies without previously submitting an inquiry</td>
+        </tr>
+        <tr>
+            <td><strong>Yield Rate</strong></td>
+            <td>Percentage of admitted students who enroll</td>
+        </tr>
+    </table>
+    
+    <h2>Key Admission Process Terms</h2>
+    
+    <table>
+        <tr>
+            <th>Term</th>
+            <th>Definition</th>
+        </tr>
+        <tr>
+            <td><strong>Acceptance Rate</strong></td>
+            <td>Percentage of applicants offered admission</td>
+        </tr>
+        <tr>
+            <td><strong>Application Completion Rate</strong></td>
+            <td>Percentage of started applications that are submitted</td>
+        </tr>
+        <tr>
+            <td><strong>Demonstrated Interest</strong></td>
+            <td>Actions showing genuine interest (visits, event attendance, engagement)</td>
+        </tr>
+        <tr>
+            <td><strong>Melt</strong></td>
+            <td>Students who deposit but don't ultimately enroll (summer melt)</td>
+        </tr>
+        <tr>
+            <td><strong>Rolling Admission</strong></td>
+            <td>Applications reviewed as received; ongoing decisions throughout cycle</td>
+        </tr>
+        <tr>
+            <td><strong>Waitlist</strong></td>
+            <td>Qualified applicants who may be offered admission if spaces become available</td>
+        </tr>
+        <tr>
+            <td><strong>Win Rate</strong></td>
+            <td>Overall percentage from application to enrollment</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 12: TERMINOLOGY CONTINUED -->
+<div class="page-break">
+    <h2>Metric & Analytics Terms</h2>
+    
+    <table>
+        <tr>
+            <th>Term</th>
+            <th>Definition</th>
+        </tr>
+        <tr>
+            <td><strong>CAC</strong></td>
+            <td>Customer Acquisition Cost - total cost to enroll one student</td>
+        </tr>
+        <tr>
+            <td><strong>Conversion Rate</strong></td>
+            <td>Percentage advancing from one stage to next</td>
+        </tr>
+        <tr>
+            <td><strong>CPE</strong></td>
+            <td>Cost per Enrolled Student (same as CAC)</td>
+        </tr>
+        <tr>
+            <td><strong>CPI / CPL</strong></td>
+            <td>Cost per Inquiry / Cost per Lead</td>
+        </tr>
+        <tr>
+            <td><strong>CTR</strong></td>
+            <td>Click-Through Rate - percentage who click a link</td>
+        </tr>
+        <tr>
+            <td><strong>Funnel</strong></td>
+            <td>Visual representation of the student journey from awareness to enrollment</td>
+        </tr>
+        <tr>
+            <td><strong>KPI</strong></td>
+            <td>Key Performance Indicator - quantifiable metric to track performance</td>
+        </tr>
+        <tr>
+            <td><strong>LTV</strong></td>
+            <td>Lifetime Value - total revenue from a student over enrollment</td>
+        </tr>
+        <tr>
+            <td><strong>Pipeline Velocity</strong></td>
+            <td>Speed at which prospects move through funnel stages</td>
+        </tr>
+        <tr>
+            <td><strong>ROI</strong></td>
+            <td>Return on Investment - revenue vs. cost</td>
+        </tr>
+    </table>
+    
+    <h2>Retention & Success Terms</h2>
+    
+    <table>
+        <tr>
+            <th>Term</th>
+            <th>Definition</th>
+        </tr>
+        <tr>
+            <td><strong>Attrition Rate</strong></td>
+            <td>Percentage of students who leave before completing degree</td>
+        </tr>
+        <tr>
+            <td><strong>First-Year Retention</strong></td>
+            <td>Percentage of students who return for second year</td>
+        </tr>
+        <tr>
+            <td><strong>Graduation Rate</strong></td>
+            <td>Percentage who complete degree within specified timeframe</td>
+        </tr>
+        <tr>
+            <td><strong>Persistence</strong></td>
+            <td>Continued enrollment from term to term</td>
+        </tr>
+        <tr>
+            <td><strong>Stop-Out</strong></td>
+            <td>Student who temporarily leaves with intent to return</td>
+        </tr>
+        <tr>
+            <td><strong>Time to Degree</strong></td>
+            <td>Length of time from enrollment to completion</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 13: MARKETING TERMS -->
+<div class="page-break">
+    <h2>Marketing & Communication Terms</h2>
+    
+    <table>
+        <tr>
+            <th>Term</th>
+            <th>Definition</th>
+        </tr>
+        <tr>
+            <td><strong>A/B Testing</strong></td>
+            <td>Comparing two versions to determine which performs better</td>
+        </tr>
+        <tr>
+            <td><strong>Attribution</strong></td>
+            <td>Crediting marketing touchpoints for conversions</td>
+        </tr>
+        <tr>
+            <td><strong>Campaign</strong></td>
+            <td>Coordinated marketing initiative with specific goals</td>
+        </tr>
+        <tr>
+            <td><strong>Dynamic Content</strong></td>
+            <td>Content that changes based on recipient attributes</td>
+        </tr>
+        <tr>
+            <td><strong>Journey</strong></td>
+            <td>Automated, personalized series of communications</td>
+        </tr>
+        <tr>
+            <td><strong>Lead Quality</strong></td>
+            <td>Measure of how likely leads are to convert</td>
+        </tr>
+        <tr>
+            <td><strong>Nurture Campaign</strong></td>
+            <td>Series of communications to move prospects toward application</td>
+        </tr>
+        <tr>
+            <td><strong>Segmentation</strong></td>
+            <td>Dividing audience into groups based on characteristics</td>
+        </tr>
+        <tr>
+            <td><strong>UTM Parameters</strong></td>
+            <td>Tags added to URLs to track campaign performance</td>
+        </tr>
+    </table>
+    
+    <h2>Important Acronyms</h2>
+    
+    <table>
+        <tr>
+            <th>Acronym</th>
+            <th>Full Term</th>
+            <th>Use</th>
+        </tr>
+        <tr>
+            <td><strong>CAC</strong></td>
+            <td>Customer Acquisition Cost</td>
+            <td>Finance/Marketing</td>
+        </tr>
+        <tr>
+            <td><strong>CRM</strong></td>
+            <td>Customer Relationship Management</td>
+            <td>Technology</td>
+        </tr>
+        <tr>
+            <td><strong>CPE</strong></td>
+            <td>Cost per Enrolled Student</td>
+            <td>Finance/Marketing</td>
+        </tr>
+        <tr>
+            <td><strong>CTR</strong></td>
+            <td>Click-Through Rate</td>
+            <td>Marketing</td>
+        </tr>
+        <tr>
+            <td><strong>IER</strong></td>
+            <td>Individual Email Result</td>
+            <td>Marketing Cloud</td>
+        </tr>
+        <tr>
+            <td><strong>KPI</strong></td>
+            <td>Key Performance Indicator</td>
+            <td>Analytics</td>
+        </tr>
+        <tr>
+            <td><strong>LTV</strong></td>
+            <td>Lifetime Value</td>
+            <td>Finance</td>
+        </tr>
+        <tr>
+            <td><strong>RFI</strong></td>
+            <td>Request for Information</td>
+            <td>Admissions</td>
+        </tr>
+        <tr>
+            <td><strong>ROI</strong></td>
+            <td>Return on Investment</td>
+            <td>Finance</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 14: CALCULATION FORMULAS -->
+<div class="page-break">
+    <h2>Essential Calculation Formulas</h2>
+    
+    <h3>Conversion Rates</h3>
+    <div class="formula">
+        Conversion Rate = (Number Who Advanced / Number in Starting Stage) × 100
+    </div>
+    
+    <h3>Cost Metrics</h3>
+    <div class="formula">
+        Cost per Lead = Total Marketing Spend / Number of Leads
+        <br><br>
+        Cost per Applicant = Total Recruitment Spend / Number of Applicants
+        <br><br>
+        Cost per Enrolled = Total Recruitment & Marketing Spend / Number Enrolled
+    </div>
+    
+    <h3>Yield Metrics</h3>
+    <div class="formula">
+        Overall Yield Rate = (Number Enrolled / Number Admitted) × 100
+        <br><br>
+        Offer-to-Deposit Yield = (Number Deposited / Number Admitted) × 100
+        <br><br>
+        Deposit-to-Enrollment = (Number Enrolled / Number Deposited) × 100
+    </div>
+    
+    <h3>ROI Metrics</h3>
+    <div class="formula">
+        LTV:CAC Ratio = Lifetime Value / Customer Acquisition Cost
+        <br><br>
+        Lifetime Value = Average Tuition per Term × Average Terms Enrolled
+        <br><br>
+        Marketing ROI = (Revenue - Marketing Spend) / Marketing Spend × 100
+    </div>
+    
+    <h3>Retention Metrics</h3>
+    <div class="formula">
+        Retention Rate = (Students Returning / Initial Cohort) × 100
+        <br><br>
+        Attrition Rate = (Students Who Left / Initial Cohort) × 100
+        <br><br>
+        Note: Retention Rate + Attrition Rate = 100%
+    </div>
+    
+    <h3>Email Metrics</h3>
+    <div class="formula">
+        Open Rate = (Opens / Delivered Emails) × 100
+        <br><br>
+        Click Rate = (Clicks / Delivered Emails) × 100
+        <br><br>
+        Click-to-Open Rate = (Clicks / Opens) × 100
+    </div>
+</div>
+
+<!-- PAGE 15: CORE TOOLS -->
+<div class="page-break">
+    <h1>Section 4: Core Technology Tools</h1>
+    
+    <h2>Salesforce (CRM)</h2>
+    
+    <div class="definition-term">Purpose</div>
+    <p>Customer Relationship Management platform for managing student data, tracking interactions, and managing the recruitment pipeline.</p>
+    
+    <h4>Key Objects:</h4>
+    <ul>
+        <li><strong>Contact:</strong> Individual person record (student, prospect, applicant)</li>
+        <li><strong>Lead:</strong> Early-stage prospect not yet qualified</li>
+        <li><strong>Opportunity:</strong> Tracks application pipeline from prospect to matriculation</li>
+        <li><strong>Campaign:</strong> Plans, tracks, and analyzes marketing efforts</li>
+    </ul>
+    
+    <h4>Opportunity Stages:</h4>
+    <ol>
+        <li>Prospective - Initial interest</li>
+        <li>In-Progress Application - Started but not submitted</li>
+        <li>Application - Complete application submitted</li>
+        <li>Admit - Offered admission</li>
+        <li>Deposit - Accepted offer and deposited</li>
+        <li>Enrolled - Matriculated</li>
+    </ol>
+    
+    <h4>Daily Use:</h4>
+    <ul>
+        <li>Track all prospect and student interactions</li>
+        <li>Generate reports on funnel performance</li>
+        <li>Manage recruitment campaigns</li>
+        <li>Forecast enrollment based on pipeline</li>
+    </ul>
+    
+    <h2>Marketing Cloud</h2>
+    
+    <div class="definition-term">Purpose</div>
+    <p>Digital marketing platform for creating, automating, and analyzing email campaigns and multi-channel journeys.</p>
+    
+    <h4>Key Components:</h4>
+    <ul>
+        <li><strong>Email Studio:</strong> Create and send email campaigns</li>
+        <li><strong>Journey Builder:</strong> Automated, personalized communication sequences</li>
+        <li><strong>Audience Builder:</strong> Segment and target specific groups</li>
+        <li><strong>Content Builder:</strong> Manage email templates and content</li>
+        <li><strong>Automation Studio:</strong> Automate repetitive tasks</li>
+    </ul>
+    
+    <h4>Integration with Salesforce:</h4>
+    <ul>
+        <li>Data syncs every 15 minutes</li>
+        <li>Salesforce data available for targeting and personalization</li>
+        <li>Email engagement tracked back to Salesforce (IERs)</li>
+    </ul>
+    
+    <h4>Daily Use:</h4>
+    <ul>
+        <li>Send targeted email campaigns</li>
+        <li>Create automated nurture journeys</li>
+        <li>Track email engagement metrics</li>
+        <li>Segment audiences for personalization</li>
+    </ul>
+</div>
+
+<!-- PAGE 16: TOOLS CONTINUED -->
+<div class="page-break">
+    <h2>Campaign vs. Journey: Key Differences</h2>
+    
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Campaign</th>
+            <th>Journey</th>
+        </tr>
+        <tr>
+            <td><strong>Purpose</strong></td>
+            <td>Track and manage marketing initiatives</td>
+            <td>Automate personalized communication sequences</td>
+        </tr>
+        <tr>
+            <td><strong>Scope</strong></td>
+            <td>Broader; overall strategy</td>
+            <td>Granular; individual experience</td>
+        </tr>
+        <tr>
+            <td><strong>Automation</strong></td>
+            <td>May include automated elements</td>
+            <td>Highly automated; behavior-triggered</td>
+        </tr>
+        <tr>
+            <td><strong>Use Case</strong></td>
+            <td>Open house promotional push</td>
+            <td>Incomplete application nurture sequence</td>
+        </tr>
+    </table>
+    
+    <h2>Google Analytics</h2>
+    
+    <div class="definition-term">Purpose</div>
+    <p>Web analytics platform to track website traffic, user behavior, and campaign effectiveness.</p>
+    
+    <h4>Key Metrics to Track:</h4>
+    <ul>
+        <li><strong>Sessions & Users:</strong> Website traffic volume</li>
+        <li><strong>Traffic Sources:</strong> Where visitors come from</li>
+        <li><strong>Behavior Flow:</strong> Path through website</li>
+        <li><strong>Goal Completions:</strong> RFI submissions, application starts</li>
+        <li><strong>Campaign Performance:</strong> UTM tracking for all marketing</li>
+    </ul>
+    
+    <h4>Daily Use:</h4>
+    <ul>
+        <li>Monitor website traffic trends</li>
+        <li>Evaluate campaign effectiveness</li>
+        <li>Identify popular content</li>
+        <li>Track goal conversions</li>
+    </ul>
+    
+    <h2>Essential Reports & Dashboards</h2>
+    
+    <h3>Weekly Funnel Report</h3>
+    <p>Track these metrics every Monday:</p>
+    <ul>
+        <li>Count at each funnel stage</li>
+        <li>Week-over-week change</li>
+        <li>Conversion rates between stages</li>
+        <li>Days between stages</li>
+        <li>Alerts for significant drops</li>
+    </ul>
+    
+    <h3>Monthly Marketing Performance Report</h3>
+    <ul>
+        <li>Lead volume by channel</li>
+        <li>Cost per lead by channel</li>
+        <li>Conversion rate by channel</li>
+        <li>Cost per enrolled by channel</li>
+        <li>LTV:CAC ratio by program</li>
+    </ul>
+    
+    <h3>Quarterly Strategic Review</h3>
+    <ul>
+        <li>Year-over-year comparisons</li>
+        <li>Trend analysis</li>
+        <li>Benchmark comparisons</li>
+        <li>Program-level deep dives</li>
+        <li>Strategic recommendations</li>
+    </ul>
+</div>
+
+<!-- PAGE 17: BENCHMARKS -->
+<div class="page-break">
+    <h1>Section 5: Benchmarks & Targets</h1>
+    
+    <h2>Cross-Funnel Conversion Benchmarks</h2>
+    
+    <table>
+        <tr>
+            <th>Conversion Point</th>
+            <th>Benchmark Range</th>
+            <th>Target</th>
+            <th>Interpretation</th>
+        </tr>
+        <tr>
+            <td><strong>Prospect → Inquiry</strong></td>
+            <td>8-12%</td>
+            <td>10%</td>
+            <td>Brand awareness effectiveness</td>
+        </tr>
+        <tr>
+            <td><strong>Inquiry → Application</strong></td>
+            <td>13-18%</td>
+            <td>15%</td>
+            <td>Nurture campaign success</td>
+        </tr>
+        <tr>
+            <td><strong>Application Completion</strong></td>
+            <td>50-60%</td>
+            <td>55%</td>
+            <td>Application usability</td>
+        </tr>
+        <tr>
+            <td><strong>Completed → Admit</strong></td>
+            <td>60-70%</td>
+            <td>65%</td>
+            <td>Program selectivity</td>
+        </tr>
+        <tr>
+            <td><strong>Admit → Deposit</strong></td>
+            <td>60-70%</td>
+            <td>65%</td>
+            <td>Yield effectiveness</td>
+        </tr>
+        <tr>
+            <td><strong>Deposit → Enrolled</strong></td>
+            <td>95-100%</td>
+            <td>97%</td>
+            <td>Melt prevention</td>
+        </tr>
+        <tr>
+            <td><strong>Overall Win Rate</strong></td>
+            <td>3-4%</td>
+            <td>3.5%</td>
+            <td>End-to-end efficiency</td>
+        </tr>
+    </table>
+    
+    <h2>Marketing Performance Benchmarks</h2>
+    
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Benchmark</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td><strong>Cost per Inquiry</strong></td>
+            <td>$140 average</td>
+            <td>Varies significantly by channel and program</td>
+        </tr>
+        <tr>
+            <td><strong>Cost per Enrolled</strong></td>
+            <td>$2,850 average</td>
+            <td>Graduate programs; includes all recruitment costs</td>
+        </tr>
+        <tr>
+            <td><strong>Email Open Rate</strong></td>
+            <td>44%</td>
+            <td>Higher education industry average</td>
+        </tr>
+        <tr>
+            <td><strong>Email Click Rate</strong></td>
+            <td>2.5-3.5%</td>
+            <td>Target for marketing emails</td>
+        </tr>
+        <tr>
+            <td><strong>Website Growth</strong></td>
+            <td>+10-20% MoM</td>
+            <td>During active recruitment seasons</td>
+        </tr>
+    </table>
+    
+    <h2>Financial Benchmarks</h2>
+    
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Minimum</th>
+            <th>Target</th>
+            <th>Excellent</th>
+        </tr>
+        <tr>
+            <td><strong>LTV:CAC Ratio</strong></td>
+            <td>3:1</td>
+            <td>5:1</td>
+            <td>7:1+</td>
+        </tr>
+        <tr>
+            <td><strong>Marketing ROI</strong></td>
+            <td>200%</td>
+            <td>400%</td>
+            <td>600%+</td>
+        </tr>
+    </table>
+    
+    <div class="metric-box">
+        <strong>Important Note on Benchmarks:</strong>
+        <p>These benchmarks are industry averages and guidelines. Your performance will vary based on:</p>
+        <ul>
+            <li>Program type (professional vs. academic)</li>
+            <li>Delivery mode (online vs. on-campus)</li>
+            <li>Institution type and reputation</li>
+            <li>Geographic market</li>
+            <li>Program competitiveness</li>
+        </ul>
+        <p><span class="key-point">Focus on YOUR trends over time rather than external comparisons.</span></p>
+    </div>
+</div>
+
+<!-- PAGE 18: BENCHMARKS CONTINUED -->
+<div class="page-break">
+    <h2>Timing Benchmarks</h2>
+    
+    <table>
+        <tr>
+            <th>Timeframe</th>
+            <th>Target</th>
+            <th>Critical For</th>
+        </tr>
+        <tr>
+            <td><strong>Inquiry Response Time</strong></td>
+            <td>< 24 hours (ideal: < 4 hours)</td>
+            <td>First impression, engagement</td>
+        </tr>
+        <tr>
+            <td><strong>Inquiry → Application</strong></td>
+            <td>≤ 30 days</td>
+            <td>Maintaining momentum</td>
+        </tr>
+        <tr>
+            <td><strong>Application → Decision</strong></td>
+            <td>< 14 days</td>
+            <td>Competitive positioning</td>
+        </tr>
+        <tr>
+            <td><strong>Admit → Deposit</strong></td>
+            <td>Varies by deadline</td>
+            <td>Yield campaigns</td>
+        </tr>
+    </table>
+    
+    <h2>Retention & Success Benchmarks</h2>
+    
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Benchmark</th>
+            <th>Notes</th>
+        </tr>
+        <tr>
+            <td><strong>First-Year Retention</strong></td>
+            <td>~75.9%</td>
+            <td>Graduate programs average</td>
+        </tr>
+        <tr>
+            <td><strong>Graduation Rate (Master's)</strong></td>
+            <td>~64.2%</td>
+            <td>Within 6 years</td>
+        </tr>
+        <tr>
+            <td><strong>Attrition Rate</strong></td>
+            <td>≤ 25-30%</td>
+            <td>Varies by program type</td>
+        </tr>
+        <tr>
+            <td><strong>Summer Melt Rate</strong></td>
+            <td>< 5%</td>
+            <td>Deposits who don't enroll</td>
+        </tr>
+    </table>
+    
+    <h2>When Performance Signals Action</h2>
+    
+    <h3>🚨 Red Flags (Immediate Action Needed)</h3>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Problem Signal</th>
+            <th>Immediate Action</th>
+        </tr>
+        <tr>
+            <td>Inquiry → App</td>
+            <td>< 10%</td>
+            <td>Revamp nurture campaigns, increase counselor contact</td>
+        </tr>
+        <tr>
+            <td>App Completion</td>
+            <td>< 50%</td>
+            <td>Simplify application, add support, send reminders</td>
+        </tr>
+        <tr>
+            <td>Offer → Deposit</td>
+            <td>< 50%</td>
+            <td>Improve financial aid, enhance yield events</td>
+        </tr>
+        <tr>
+            <td>Deposit → Enroll</td>
+            <td>< 90%</td>
+            <td>Increase summer communication, early engagement</td>
+        </tr>
+        <tr>
+            <td>LTV:CAC</td>
+            <td>< 3:1</td>
+            <td>Reduce acquisition costs or increase tuition/retention</td>
+        </tr>
+    </table>
+    
+    <h3>✅ Green Lights (Double Down)</h3>
+    <ul>
+        <li><strong>Channel performing 2x average:</strong> Shift 20-30% more budget</li>
+        <li><strong>Campaign with 60%+ open rate:</strong> Replicate for other campaigns</li>
+        <li><strong>Pipeline velocity < 20 days:</strong> Document and scale what's working</li>
+        <li><strong>LTV:CAC > 7:1:</strong> Consider growth investment</li>
+    </ul>
+</div>
+
+<!-- PAGE 19: QUICK START -->
+<div class="page-break">
+    <h1>Section 6: Quick Start Guide</h1>
+    
+    <h2>Your First 30 Days with Metrics</h2>
+    
+    <h3>Week 1: Establish Baseline</h3>
+    <div class="metric-box">
+        <strong>Goal:</strong> Know where you stand today
+        <ol>
+            <li>Pull current numbers for all 6 cross-funnel KPIs</li>
+            <li>Document where each metric comes from (data source)</li>
+            <li>Create simple dashboard or spreadsheet</li>
+            <li>Share baseline with your team</li>
+        </ol>
+        <strong>Deliverable:</strong> Baseline metrics dashboard
+    </div>
+    
+    <h3>Week 2: Set Targets</h3>
+    <div class="metric-box">
+        <strong>Goal:</strong> Define success
+        <ol>
+            <li>Compare your baseline to benchmarks in this guide</li>
+            <li>Set realistic 3-month improvement goals</li>
+            <li>Assign ownership: Who's responsible for each KPI?</li>
+            <li>Schedule weekly 30-minute metric review meeting</li>
+        </ol>
+        <strong>Deliverable:</strong> Metric targets and accountability chart
+    </div>
+    
+    <h3>Week 3: Identify Quick Wins</h3>
+    <div class="metric-box">
+        <strong>Goal:</strong> Get early momentum
+        <ol>
+            <li>Find your biggest gap vs. benchmark</li>
+            <li>Pick ONE tactical improvement to implement</li>
+            <li>Launch the improvement and track impact</li>
+            <li>Document what you learn</li>
+        </ol>
+        <strong>Example:</strong> If application completion is 40% (vs. 55% target), send automated reminders to incomplete applications
+    </div>
+    
+    <h3>Week 4: Build Cadence</h3>
+    <div class="metric-box">
+        <strong>Goal:</strong> Make metrics routine
+        <ol>
+            <li>Confirm weekly metric review is happening</li>
+            <li>Create simple decision framework: "If X drops below Y, we do Z"</li>
+            <li>Train team on how to use metrics for daily decisions</li>
+            <li>Plan Month 2 improvements based on Week 3 learnings</li>
+        </ol>
+        <strong>Deliverable:</strong> Sustainable metric review process
+    </div>
+    
+    <h2>Monday Morning Ritual</h2>
+    <p>Start each week with this 15-minute check-in:</p>
+    <ol>
+        <li><strong>5 minutes:</strong> Review funnel counts at each stage</li>
+        <li><strong>5 minutes:</strong> Check week-over-week conversion rate changes</li>
+        <li><strong>5 minutes:</strong> Identify and assign any concerning trends</li>
+    </ol>
+    
+    <div class="metric-box">
+        <strong>Sample Monday Check:</strong>
+        <ul>
+            <li>✓ Inquiries: 47 this week (up from 42 last week - good trend)</li>
+            <li>⚠ Inquiry→App conversion: Dropped from 15% to 11% - ACTION: Launch re-engagement campaign</li>
+            <li>✓ Application completion: Steady at 58%</li>
+            <li>✓ Offers made: 12 (on track for monthly goal of 50)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 20: QUICK START CONTINUED -->
+<div class="page-break">
+    <h2>Essential Tools Setup</h2>
+    
+    <h3>Data Sources You Need</h3>
+    <table>
+        <tr>
+            <th>Data Type</th>
+            <th>Source</th>
+            <th>Frequency</th>
+        </tr>
+        <tr>
+            <td><strong>Funnel Counts</strong></td>
+            <td>Salesforce Opportunity Reports</td>
+            <td>Weekly</td>
+        </tr>
+        <tr>
+            <td><strong>Conversion Rates</strong></td>
+            <td>Salesforce Calculated Fields</td>
+            <td>Weekly</td>
+        </tr>
+        <tr>
+            <td><strong>Marketing Costs</strong></td>
+            <td>Finance System / Marketing Budget</td>
+            <td>Monthly</td>
+        </tr>
+        <tr>
+            <td><strong>Email Engagement</strong></td>
+            <td>Marketing Cloud / IERs in Salesforce</td>
+            <td>Per Campaign</td>
+        </tr>
+        <tr>
+            <td><strong>Website Traffic</strong></td>
+            <td>Google Analytics</td>
+            <td>Weekly</td>
+        </tr>
+        <tr>
+            <td><strong>Channel Attribution</strong></td>
+            <td>UTM Parameters in Salesforce</td>
+            <td>Monthly</td>
+        </tr>
+    </table>
+    
+    <h3>Minimum Viable Dashboard</h3>
+    <p>Start with these 10 numbers updated weekly:</p>
+    <ol>
+        <li>Count at each funnel stage (7 numbers)</li>
+        <li>Inquiry → Application conversion rate</li>
+        <li>Offer → Deposit yield rate</li>
+        <li>Total marketing spend month-to-date</li>
+    </ol>
+    
+    <h2>Common Pitfalls to Avoid</h2>
+    
+    <div class="metric-box">
+        <strong>❌ Don't:</strong>
+        <ul>
+            <li>Track too many metrics at once (start with 3-5)</li>
+            <li>Compare yourself only to external benchmarks (your trend matters more)</li>
+            <li>React to single data points (look for trends over 3-4 weeks)</li>
+            <li>Set unachievable targets (2-5% improvement is excellent)</li>
+            <li>Forget to celebrate wins (acknowledge improvements publicly)</li>
+        </ul>
+        
+        <strong>✅ Do:</strong>
+        <ul>
+            <li>Start simple and add complexity over time</li>
+            <li>Focus on what you can control and improve</li>
+            <li>Use metrics to inform decisions, not just report</li>
+            <li>Share data transparently with your team</li>
+            <li>Iterate based on what you learn</li>
+        </ul>
+    </div>
+    
+    <h2>Next Steps</h2>
+    
+    <h3>After Your First 30 Days</h3>
+    <ol>
+        <li><strong>Month 2:</strong> Add channel-level analysis (Lead Quality by Channel)</li>
+        <li><strong>Month 3:</strong> Implement full attribution tracking</li>
+        <li><strong>Month 4:</strong> Build automated alerts for red flags</li>
+        <li><strong>Month 5:</strong> Create program-level dashboards</li>
+        <li><strong>Month 6:</strong> Implement predictive modeling for forecasting</li>
+    </ol>
+    
+    <h3>Resources for Deeper Learning</h3>
+    <ul>
+        <li><strong>Full Encyclopedia:</strong> Complete 100+ term reference guide</li>
+        <li><strong>Interactive Funnel Visualizer:</strong> Model your data and see impact of improvements</li>
+        <li><strong>20-Minute Presentation:</strong> Use cases and decision frameworks</li>
+        <li><strong>Calculation Templates:</strong> Excel templates for all formulas</li>
+        <li><strong>Dashboard Templates:</strong> Pre-built Salesforce dashboard configurations</li>
+    </ul>
+    
+    <div class="metric-box" style="background: #003594; color: white; border-left: 4px solid #FFB81C;">
+        <h3 style="color: #FFB81C;">Remember: Start Small, Think Big</h3>
+        <p>You don't need perfect data or perfect dashboards to start using metrics effectively. Pick ONE metric to improve this month. Track it weekly. Make decisions based on what you see. Learn. Adjust. Repeat.</p>
+        <p><strong>Small improvements compound over time into significant results.</strong></p>
+    </div>
+    
+    <div class="footer">
+        <p><strong>Graduate Enrollment Metrics: Quick Reference Guide</strong></p>
+        <p>University of Pittsburgh Graduate Studies | Version 1.0 | November 2025</p>
+        <p>For questions or support: grad-enrollment@pitt.edu</p>
+        <p style="margin-top: 10px; font-style: italic;">This guide is a condensed version of the full Graduate Enrollment Encyclopedia.<br>
+        Visit the full encyclopedia for complete definitions, additional use cases, and comprehensive guidance.</p>
+    </div>
+</div>
+
+</body>
+</html>
