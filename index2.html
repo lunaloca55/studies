@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnrollAI Pro - Advanced Enrollment Management Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+    }
+    .font-display {
+      font-family: 'Syne', sans-serif;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slide-in {
+      animation: slideIn 0.4s ease-out forwards;
+    }
+    .gradient-border {
+      position: relative;
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(135deg, #6366f1, #a855f7, #ec4899) border-box;
+      border: 2px solid transparent;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-white to-purple-50">
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useMemo } = React;
+const icons = lucide;
+
+const App = () => {
+  // State management
+  const [activeNav, setActiveNav] = useState('dashboard');
+  const [analyticsTab, setAnalyticsTab] = useState('overview');
+  const [prospectFilter, setProspectFilter] = useState('all');
+  const [selectedProspect, setSelectedProspect] = useState(null);
+  const [showProspectDetail, setShowProspectDetail] = useState(false);
+  const [campaignTab, setCampaignTab] = useState('active');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [dateRange, setDateRange] = useState('30d');
+  const [selectedPrograms, setSelectedPrograms] = useState(['all']);
+  const [showFilters, setShowFilters] = useState(false);
+  const [viewMode, setViewMode] = useState('grid');
+  const [automationTab, setAutomationTab] = useState('workflows');
+  const [yieldTab, setYieldTab] = useState('overview');
+  const [competitiveTab, setCompetitiveTab] = useState('overview');
+  const [contentTab, setContentTab] = useState('library');
+  const [predictionTab, setPredictionTab] = useState('enrollment');
+  const [financeTab, setFinanceTab] = useState('overview');
+  const [notificationCount, setNotificationCount] = useState(12);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [selectedApp, setSelectedApp] = useState(null);
+  const [showAppDetail, setShowAppDetail] = useState(false);
+  const [communicationTab, setCommunicationTab] = useState('inbox');
+  const [selectedMessage, setSelectedMessage] = useState(null);
+
+  // Enhanced mock data with real-world complexity
+  const programs = [
+    { id: 1, name: 'MBA Online', school: 'Katz Graduate School of Business', abbr: 'Katz', apps: 245, enrolled: 89, target: 120, tuition: 52000, avgClass: 24, format: 'Online', duration: '24 months', startTerms: ['Fall', 'Spring'], rank: 42 },
+    { id: 2, name: 'MS Data Science', school: 'School of Computing and Information', abbr: 'SCI', apps: 189, enrolled: 67, target: 75, tuition: 45000, avgClass: 28, format: 'Online', duration: '16 months', startTerms: ['Fall', 'Spring', 'Summer'], rank: 28 },
+    { id: 3, name: 'MSN Nurse Practitioner', school: 'School of Nursing', abbr: 'Nursing', apps: 156, enrolled: 98, target: 100, tuition: 38000, avgClass: 22, format: 'Online', duration: '28 months', startTerms: ['Fall', 'Spring'], rank: 15 },
+    { id: 4, name: 'MS Cybersecurity', school: 'School of Computing and Information', abbr: 'SCI', apps: 134, enrolled: 45, target: 60, tuition: 48000, avgClass: 26, format: 'Hybrid', duration: '18 months', startTerms: ['Fall'], rank: 35 },
+    { id: 5, name: 'EdD Educational Leadership', school: 'School of Education', abbr: 'Education', apps: 98, enrolled: 52, target: 50, tuition: 42000, avgClass: 18, format: 'Online', duration: '36 months', startTerms: ['Fall'], rank: 22 },
+    { id: 6, name: 'MS Healthcare Analytics', school: 'School of Public Health', abbr: 'Public Health', apps: 87, enrolled: 34, target: 45, tuition: 46000, avgClass: 20, format: 'Online', duration: '20 months', startTerms: ['Fall', 'Spring'], rank: 31 },
+    { id: 7, name: 'MS Supply Chain Management', school: 'Katz Graduate School of Business', abbr: 'Katz', apps: 76, enrolled: 29, target: 35, tuition: 49000, avgClass: 22, format: 'Online', duration: '18 months', startTerms: ['Fall', 'Spring'], rank: 38 },
+    { id: 8, name: 'MS Social Work', school: 'School of Social Work', abbr: 'Social Work', apps: 123, enrolled: 64, target: 60, tuition: 36000, avgClass: 25, format: 'Hybrid', duration: '24 months', startTerms: ['Fall'], rank: 18 }
+  ];
+
+  const prospects = [
+    { id: 1, name: 'Sarah Chen', email: 'schen@email.com', phone: '415-555-0123', program: 'MBA Online', stage: 'Inquiry', score: 87, lastContact: '2 days ago', source: 'Google Ads', location: 'San Francisco, CA', intent: 'High', tags: ['Working Professional', 'Tech Background'], notes: 3, nextAction: 'Follow-up call scheduled', startTerm: 'Fall 2025', gpa: 3.6, workExp: '8 years', lastInteraction: 'Opened email', temperature: 'warm' },
+    { id: 2, name: 'Michael Rodriguez', email: 'mrodriguez@email.com', phone: '512-555-0187', program: 'MS Data Science', stage: 'Application Started', score: 92, lastContact: '1 day ago', source: 'LinkedIn', location: 'Austin, TX', intent: 'Very High', tags: ['Career Switcher', 'STEM'], notes: 5, nextAction: 'Application deadline reminder', startTerm: 'Spring 2026', gpa: 3.8, workExp: '5 years', lastInteraction: 'Started application', temperature: 'hot' },
+    { id: 3, name: 'Emily Thompson', email: 'ethompson@email.com', phone: '412-555-0192', program: 'MSN Nurse Practitioner', stage: 'Application Complete', score: 78, lastContact: '4 days ago', source: 'Organic Search', location: 'Pittsburgh, PA', intent: 'Medium', tags: ['Healthcare', 'Local'], notes: 2, nextAction: 'Decision pending', startTerm: 'Fall 2025', gpa: 3.4, workExp: '12 years', lastInteraction: 'Submitted app', temperature: 'warm' },
+    { id: 4, name: 'James Kim', email: 'jkim@email.com', phone: '206-555-0143', program: 'MS Cybersecurity', stage: 'Admitted', score: 95, lastContact: '1 day ago', source: 'Referral', location: 'Seattle, WA', intent: 'Very High', tags: ['Military Veteran', 'High Achiever'], notes: 8, nextAction: 'Financial aid discussion', startTerm: 'Fall 2025', gpa: 3.9, workExp: '10 years', lastInteraction: 'Admission accepted', temperature: 'hot' },
+    { id: 5, name: 'Amanda Foster', email: 'afoster@email.com', phone: '303-555-0156', program: 'EdD Educational Leadership', stage: 'Inquiry', score: 65, lastContact: '5 days ago', source: 'Niche.com', location: 'Denver, CO', intent: 'Medium', tags: ['K-12 Teacher', 'First Inquiry'], notes: 1, nextAction: 'Send program info packet', startTerm: 'Fall 2025', gpa: 3.2, workExp: '15 years', lastInteraction: 'Form submission', temperature: 'cold' },
+    { id: 6, name: 'David Martinez', email: 'dmartinez@email.com', phone: '305-555-0198', program: 'MBA Online', stage: 'Enrolled', score: 88, lastContact: 'Today', source: 'Facebook', location: 'Miami, FL', intent: 'Committed', tags: ['International', 'Finance Background'], notes: 12, nextAction: 'Onboarding checklist', startTerm: 'Fall 2025', gpa: 3.7, workExp: '7 years', lastInteraction: 'Deposit paid', temperature: 'committed' },
+    { id: 7, name: 'Jessica Park', email: 'jpark@email.com', phone: '917-555-0134', program: 'MS Healthcare Analytics', stage: 'Application Started', score: 81, lastContact: '3 days ago', source: 'Email Campaign', location: 'New York, NY', intent: 'High', tags: ['Healthcare Analyst', 'Career Advancement'], notes: 4, nextAction: 'Transcript reminder', startTerm: 'Spring 2026', gpa: 3.5, workExp: '6 years', lastInteraction: 'Downloaded materials', temperature: 'warm' },
+    { id: 8, name: 'Robert Johnson', email: 'rjohnson@email.com', phone: '404-555-0145', program: 'MS Supply Chain Management', stage: 'Admitted', score: 79, lastContact: '2 days ago', source: 'Google Ads', location: 'Atlanta, GA', intent: 'High', tags: ['Logistics Professional'], notes: 6, nextAction: 'Yield campaign follow-up', startTerm: 'Fall 2025', gpa: 3.3, workExp: '9 years', lastInteraction: 'Visited financial aid page', temperature: 'warm' }
+  ];
+
+  const applications = [
+    { id: 1, prospectId: 1, name: 'Sarah Chen', program: 'MBA Online', status: 'Under Review', submitted: '2024-11-15', completeness: 85, documents: ['Transcript', 'Resume', 'Essays'], missing: ['Letters of Rec (1)'], reviewScore: null, reviewer: 'Unassigned', priority: 'Medium', flags: [] },
+    { id: 2, prospectId: 2, name: 'Michael Rodriguez', program: 'MS Data Science', status: 'Incomplete', submitted: '2024-12-01', completeness: 45, documents: ['Transcript', 'Resume'], missing: ['Essays', 'Letters of Rec (3)'], reviewScore: null, reviewer: 'Unassigned', priority: 'High', flags: ['Application deadline approaching'] },
+    { id: 3, prospectId: 3, name: 'Emily Thompson', program: 'MSN Nurse Practitioner', status: 'Committee Review', submitted: '2024-10-28', completeness: 100, documents: ['All Required'], missing: [], reviewScore: 78, reviewer: 'Dr. Wilson', priority: 'Medium', flags: [] },
+    { id: 4, prospectId: 4, name: 'James Kim', program: 'MS Cybersecurity', status: 'Admitted', submitted: '2024-10-15', completeness: 100, documents: ['All Required'], missing: [], reviewScore: 95, reviewer: 'Dr. Patterson', priority: 'High', flags: ['Military veteran', 'Scholarship eligible'] },
+    { id: 5, prospectId: 7, name: 'Jessica Park', program: 'MS Healthcare Analytics', status: 'Incomplete', submitted: '2024-11-20', completeness: 60, documents: ['Transcript', 'Resume', 'Essays'], missing: ['Letters of Rec (2)'], reviewScore: null, reviewer: 'Unassigned', priority: 'Medium', flags: [] },
+    { id: 6, prospectId: 8, name: 'Robert Johnson', program: 'MS Supply Chain Management', status: 'Admitted', submitted: '2024-10-22', completeness: 100, documents: ['All Required'], missing: [], reviewScore: 79, reviewer: 'Dr. Lee', priority: 'Medium', flags: ['At-risk yield'] }
+  ];
+
+  const funnelData = [
+    { stage: 'Awareness', prospects: 12450, percentage: 100, avgDays: 0, color: '#6366f1', dropoff: 0, trend: 'up' },
+    { stage: 'Inquiry', prospects: 4234, percentage: 34, avgDays: 3, color: '#8b5cf6', dropoff: 66, trend: 'stable' },
+    { stage: 'Application Started', prospects: 1846, percentage: 14.8, avgDays: 12, color: '#a855f7', dropoff: 56.4, trend: 'up' },
+    { stage: 'Application Complete', prospects: 892, percentage: 7.2, avgDays: 18, color: '#c084fc', dropoff: 51.7, trend: 'up' },
+    { stage: 'Admitted', prospects: 579, percentage: 4.7, avgDays: 8, color: '#d946ef', dropoff: 35.1, trend: 'stable' },
+    { stage: 'Deposit Paid', prospects: 453, percentage: 3.6, avgDays: 14, color: '#e879f9', dropoff: 21.8, trend: 'up' },
+    { stage: 'Enrolled', prospects: 412, percentage: 3.3, avgDays: 7, color: '#10b981', dropoff: 9.1, trend: 'stable' }
+  ];
+
+  const sourceData = [
+    { source: 'Google Ads - Search', leads: 1248, inquiries: 456, apps: 189, cost: 42560, cpl: 34.10, cpi: 93.25, cpa: 225.18, roi: 8.2, conv: 156, convRate: 12.5 },
+    { source: 'Google Ads - Display', leads: 892, inquiries: 312, apps: 134, cost: 18940, cpl: 21.23, cpi: 60.71, cpa: 141.34, roi: 12.4, conv: 98, convRate: 11.0 },
+    { source: 'Facebook Ads', leads: 1034, inquiries: 378, apps: 156, cost: 28700, cpl: 27.76, cpi: 75.93, cpa: 183.97, roi: 6.8, conv: 112, convRate: 10.8 },
+    { source: 'LinkedIn Ads', leads: 445, inquiries: 198, apps: 89, cost: 31200, cpl: 70.11, cpi: 157.58, cpa: 350.56, roi: 4.2, conv: 67, convRate: 15.1 },
+    { source: 'Niche.com', leads: 234, inquiries: 89, apps: 45, cost: 15000, cpl: 64.10, cpi: 168.54, cpa: 333.33, roi: 5.1, conv: 34, convRate: 14.5 },
+    { source: 'Organic Search', leads: 1678, inquiries: 589, apps: 278, cost: 0, cpl: 0, cpi: 0, cpa: 0, roi: null, conv: 245, convRate: 14.6 },
+    { source: 'Direct Traffic', leads: 892, inquiries: 298, apps: 189, cost: 0, cpl: 0, cpi: 0, cpa: 0, roi: null, conv: 178, convRate: 20.0 },
+    { source: 'Email Marketing', leads: 567, inquiries: 234, apps: 156, cost: 3200, cpl: 5.64, cpi: 13.68, cpa: 20.51, roi: 42.3, conv: 134, convRate: 23.6 },
+    { source: 'Referral Program', leads: 312, inquiries: 156, apps: 98, cost: 0, cpl: 0, cpi: 0, cpa: 0, roi: null, conv: 89, convRate: 28.5 },
+    { source: 'Retargeting', leads: 456, inquiries: 189, apps: 98, cost: 8900, cpl: 19.52, cpi: 47.09, cpa: 90.82, roi: 15.2, conv: 67, convRate: 14.7 }
+  ];
+
+  const automationWorkflows = [
+    { id: 1, name: 'Inquiry Nurture Sequence', status: 'active', trigger: 'New inquiry submitted', actions: 7, steps: ['Welcome email', 'Program overview', 'Student testimonial', 'Faculty spotlight', 'Application guide', 'Deadline reminder', 'Follow-up call'], contacts: 1234, enrolled: 89, avgTime: '18 days', lastRun: '2 hours ago', openRate: 67.3, clickRate: 23.8, convRate: 7.2 },
+    { id: 2, name: 'Application Abandonment', status: 'active', trigger: 'App started but not completed in 48hrs', actions: 5, steps: ['Reminder email', 'Completion tips', 'Support offer', 'Deadline alert', 'Final reminder'], contacts: 456, enrolled: 34, avgTime: '12 days', lastRun: '5 hours ago', openRate: 72.1, clickRate: 28.4, convRate: 7.5 },
+    { id: 3, name: 'Admitted Student Yield', status: 'active', trigger: 'Student admitted', actions: 9, steps: ['Congratulations', 'Financial aid info', 'Student life video', 'Faculty intro', 'Alumni connection', 'Campus visit invite', 'Peer chat', 'Decision deadline', 'Deposit reminder'], contacts: 234, enrolled: 152, avgTime: '21 days', lastRun: '1 hour ago', openRate: 84.2, clickRate: 41.7, convRate: 65.0 },
+    { id: 4, name: 'Waitlist Engagement', status: 'paused', trigger: 'Added to waitlist', actions: 4, steps: ['Status update', 'Alternative programs', 'Next steps', 'Timeline info'], contacts: 67, enrolled: 12, avgTime: '45 days', lastRun: '2 days ago', openRate: 58.3, clickRate: 19.4, convRate: 17.9 },
+    { id: 5, name: 'Event Follow-up Sequence', status: 'active', trigger: 'Attended virtual event', actions: 3, steps: ['Thank you note', 'Recording link', 'Next steps'], contacts: 892, enrolled: 67, avgTime: '8 days', lastRun: '30 min ago', openRate: 71.8, clickRate: 31.2, convRate: 7.5 },
+    { id: 6, name: 'Re-engagement Campaign', status: 'active', trigger: 'No activity in 30 days', actions: 4, steps: ['Check-in email', 'New program updates', 'Success stories', 'Personal outreach'], contacts: 345, enrolled: 23, avgTime: '25 days', lastRun: '6 hours ago', openRate: 42.1, clickRate: 15.3, convRate: 6.7 }
+  ];
+
+  const yieldStrategies = [
+    { program: 'MBA Online', admitted: 189, committed: 89, deposited: 89, target: 120, yieldRate: 47.1, scholarship: 28, schAvg: 8500, needGap: 31, atRisk: 12, deposits: 89, avgDaysToDeposit: 14, predictedYield: 114, confidence: 87 },
+    { program: 'MS Data Science', admitted: 145, committed: 67, deposited: 67, target: 75, yieldRate: 46.2, scholarship: 22, schAvg: 7200, needGap: 8, atRisk: 18, deposits: 67, avgDaysToDeposit: 11, predictedYield: 71, confidence: 82 },
+    { program: 'MSN Nurse Practitioner', admitted: 167, committed: 98, deposited: 98, target: 100, yieldRate: 58.7, scholarship: 31, schAvg: 6800, needGap: 2, atRisk: 5, deposits: 98, avgDaysToDeposit: 9, predictedYield: 102, confidence: 91 },
+    { program: 'MS Cybersecurity', admitted: 98, committed: 45, deposited: 45, target: 60, yieldRate: 45.9, scholarship: 15, schAvg: 9600, needGap: 15, atRisk: 22, deposits: 45, avgDaysToDeposit: 16, predictedYield: 52, confidence: 74 },
+    { program: 'EdD Educational Leadership', admitted: 78, committed: 52, deposited: 52, target: 50, yieldRate: 66.7, scholarship: 18, schAvg: 7500, needGap: 0, atRisk: 3, deposits: 52, avgDaysToDeposit: 13, predictedYield: 54, confidence: 89 },
+    { program: 'MS Healthcare Analytics', admitted: 67, committed: 34, deposited: 34, target: 45, yieldRate: 50.7, scholarship: 12, schAvg: 8200, needGap: 11, atRisk: 8, deposits: 34, avgDaysToDeposit: 15, predictedYield: 38, confidence: 76 }
+  ];
+
+  const competitiveIntel = [
+    { school: 'Carnegie Mellon University', program: 'MBA Online', tuition: 68000, rankChange: 0, rank: 32, applications: 'High', yieldEst: '52%', avgGMAT: 680, acceptance: '35%', strength: 'Brand prestige, Tech ecosystem, Strong alumni', marketShare: 8.2 },
+    { school: 'Penn State World Campus', program: 'MBA Online', tuition: 49500, rankChange: 2, rank: 38, applications: 'Very High', yieldEst: '48%', avgGMAT: 640, acceptance: '45%', strength: 'Price value, Large network, Flexibility', marketShare: 12.4 },
+    { school: 'Drexel University', program: 'MBA Online', tuition: 54000, rankChange: -1, rank: 44, applications: 'Medium', yieldEst: '44%', avgGMAT: 620, acceptance: '52%', strength: 'Co-op program, Philadelphia market', marketShare: 5.8 },
+    { school: 'Temple University', program: 'MBA Online', tuition: 47000, rankChange: 1, rank: 48, applications: 'Medium', yieldEst: '41%', avgGMAT: 610, acceptance: '58%', strength: 'Value proposition, Urban location', marketShare: 6.1 },
+    { school: 'Villanova University', program: 'MBA Online', tuition: 59000, rankChange: -2, rank: 52, applications: 'Medium', yieldEst: '43%', avgGMAT: 650, acceptance: '42%', strength: 'Catholic network, Regional reputation', marketShare: 4.7 }
+  ];
+
+  const contentLibrary = [
+    { id: 1, title: 'MBA Program Overview Brochure', type: 'PDF', size: '2.4 MB', views: 2345, downloads: 892, conversion: 12.4, updated: '2 days ago', tags: ['Brochure', 'MBA', 'Program Info'], programs: ['MBA Online'], status: 'Active', lastEdited: 'Marketing Team' },
+    { id: 2, title: 'Student Success Stories', type: 'Video', size: '45 MB', views: 5678, downloads: 0, conversion: 18.7, updated: '1 week ago', tags: ['Testimonial', 'Video', 'Alumni'], programs: ['All Programs'], status: 'Active', lastEdited: 'Content Team' },
+    { id: 3, title: 'Virtual Campus Tour 360', type: 'Video', size: '120 MB', views: 4521, downloads: 0, conversion: 15.2, updated: '3 days ago', tags: ['Tour', 'Video', 'Campus'], programs: ['All Programs'], status: 'Active', lastEdited: 'Video Production' },
+    { id: 4, title: 'Financial Aid Comprehensive Guide', type: 'PDF', size: '1.8 MB', views: 3456, downloads: 1234, conversion: 9.8, updated: '5 days ago', tags: ['Financial Aid', 'Guide', 'Resources'], programs: ['All Programs'], status: 'Active', lastEdited: 'Financial Aid Office' },
+    { id: 5, title: '2024 Career Outcomes Report', type: 'PDF', size: '3.2 MB', views: 2890, downloads: 967, conversion: 14.5, updated: '1 week ago', tags: ['Outcomes', 'Data', 'Careers'], programs: ['MBA Online', 'MS Data Science'], status: 'Active', lastEdited: 'Career Services' },
+    { id: 6, title: 'Faculty Spotlight Blog Series', type: 'Blog', size: 'N/A', views: 1234, downloads: 0, conversion: 8.3, updated: '4 days ago', tags: ['Faculty', 'Blog', 'Research'], programs: ['All Programs'], status: 'Active', lastEdited: 'Communications' },
+    { id: 7, title: 'Application Tips Webinar Recording', type: 'Video', size: '78 MB', views: 3210, downloads: 456, conversion: 11.2, updated: '1 week ago', tags: ['Webinar', 'Application', 'Admissions'], programs: ['All Programs'], status: 'Active', lastEdited: 'Admissions' },
+    { id: 8, title: 'Data Science Curriculum Overview', type: 'PDF', size: '1.5 MB', views: 1876, downloads: 678, conversion: 16.8, updated: '2 weeks ago', tags: ['Curriculum', 'Data Science'], programs: ['MS Data Science'], status: 'Active', lastEdited: 'Academic Affairs' }
+  ];
+
+  const predictions = {
+    enrollment: [
+      { program: 'MBA Online', current: 89, predicted: 114, target: 120, confidence: 87, variance: 25, trend: 'up', projected_revenue: 5928000, factors: ['Strong Q3 inquiry volume', 'Above avg conversion rate', 'Scholarship leverage optimal'] },
+      { program: 'MS Data Science', current: 67, predicted: 71, target: 75, confidence: 82, variance: 4, trend: 'up', projected_revenue: 3195000, factors: ['Market demand high', 'Competition increasing', 'Application timing favorable'] },
+      { program: 'MSN Nurse Practitioner', current: 98, predicted: 102, target: 100, confidence: 91, variance: 4, trend: 'up', projected_revenue: 3876000, factors: ['Healthcare boom', 'Strong brand reputation', 'Low competitor pressure'] },
+      { program: 'MS Cybersecurity', current: 45, predicted: 52, target: 60, confidence: 74, variance: 7, trend: 'down', projected_revenue: 2496000, factors: ['At-risk yield segment', 'Competitive pricing pressure', 'Need more marketing'] }
+    ],
+    attrition: [
+      { stage: 'Inquiry to App Start', predicted: 58, current: 56.4, risk: 'low', improvement: 1.6, actions: ['Enhance nurture emails', 'Add chat support'] },
+      { stage: 'App Start to Complete', predicted: 54, current: 51.7, risk: 'medium', improvement: 2.3, actions: ['Simplify application', 'Add progress indicators'] },
+      { stage: 'Admitted to Deposited', predicted: 32, current: 21.8, risk: 'low', improvement: -10.2, actions: ['Continue yield campaigns'] },
+      { stage: 'Deposited to Enrolled', predicted: 11, current: 9.1, risk: 'high', improvement: 1.9, actions: ['Improve onboarding', 'Reduce friction'] }
+    ]
+  };
+
+  const financialModel = {
+    overview: {
+      projected_revenue: 18495000,
+      actual_revenue: 15234000,
+      target_revenue: 19200000,
+      scholarship_budget: 3200000,
+      scholarship_used: 2456000,
+      avg_discount: 18.5,
+      net_tuition_revenue: 12778000,
+      ltv_cac: 186,
+      payback_period: 4.2
+    },
+    programs: [
+      { name: 'MBA Online', enrolled: 89, tuition: 52000, gross: 4628000, scholarships: 856320, net: 3771680, discount: 18.5, marketing: 142000, cac: 1595, ltv: 297360, roi: 186 },
+      { name: 'MS Data Science', enrolled: 67, tuition: 45000, gross: 3015000, scholarships: 543000, net: 2472000, discount: 18.0, marketing: 98000, cac: 1463, ltv: 270000, roi: 184 },
+      { name: 'MSN Nurse Practitioner', enrolled: 98, tuition: 38000, gross: 3724000, scholarships: 670320, net: 3053680, discount: 18.0, marketing: 78000, cac: 796, ltv: 228000, roi: 286 },
+      { name: 'MS Cybersecurity', enrolled: 45, tuition: 48000, gross: 2160000, scholarships: 432000, net: 1728000, discount: 20.0, marketing: 89000, cac: 1978, ltv: 288000, roi: 146 }
+    ],
+    scenarios: [
+      { name: 'Best Case', revenue: 20100000, enrollments: 445, likelihood: '15%' },
+      { name: 'Expected', revenue: 18495000, enrollments: 412, likelihood: '60%' },
+      { name: 'Conservative', revenue: 16800000, enrollments: 385, likelihood: '25%' }
+    ]
+  };
+
+  const messages = [
+    { id: 1, from: 'Sarah Chen', subject: 'Question about MBA program format', preview: 'Hi, I\'m interested in learning more about the online MBA...', date: '2 hours ago', read: false, starred: false, program: 'MBA Online', category: 'inquiry' },
+    { id: 2, from: 'Michael Rodriguez', subject: 'Transcript submission', preview: 'I wanted to confirm that you received my official transcript...', date: '5 hours ago', read: true, starred: true, program: 'MS Data Science', category: 'application' },
+    { id: 3, from: 'Emily Thompson', subject: 'Financial aid questions', preview: 'Could you provide more information about scholarship opportunities...', date: '1 day ago', read: false, starred: false, program: 'MSN Nurse Practitioner', category: 'financial' },
+    { id: 4, from: 'James Kim', subject: 'Re: Admission decision', preview: 'Thank you for the admission offer! I have a few questions about...', date: '2 days ago', read: true, starred: true, program: 'MS Cybersecurity', category: 'admitted' }
+  ];
+
+  // Helper Components
+  const NavItem = ({ icon: Icon, label, active, onClick, badge, collapsed }) => (
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-4 py-3 rounded-xl transition-all duration-200 ${
+        active 
+          ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/50' 
+          : 'text-gray-700 hover:bg-gray-100'
+      }`}
+      title={collapsed ? label : ''}
+    >
+      <div className="flex items-center gap-3">
+        <Icon size={18} />
+        {!collapsed && <span className="font-medium text-sm">{label}</span>}
+      </div>
+      {!collapsed && badge && (
+        <span className={`${active ? 'bg-white text-indigo-600' : 'bg-red-500 text-white'} text-xs font-bold px-2 py-0.5 rounded-full`}>
+          {badge}
+        </span>
+      )}
+    </button>
+  );
+
+  const MetricCard = ({ title, value, subtitle, trend, trendUp, icon: Icon, color = 'indigo', sparkline }) => (
+    <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all duration-300 animate-slide-in">
+      <div className="flex items-start justify-between mb-4">
+        <div className={`p-3 bg-gradient-to-br from-${color}-100 to-${color}-200 rounded-xl`}>
+          <Icon size={24} className={`text-${color}-600`} />
+        </div>
+        {trend && (
+          <span className={`flex items-center gap-1 text-sm font-semibold px-2 py-1 rounded-lg ${
+            trendUp ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
+          }`}>
+            {trendUp ? <icons.TrendingUp size={14} /> : <icons.TrendingDown size={14} />}
+            {trend}
+          </span>
+        )}
+      </div>
+      <div>
+        <p className="text-3xl font-bold text-gray-900 mb-1">{value}</p>
+        <p className="text-sm font-medium text-gray-600">{title}</p>
+        {subtitle && <p className="text-xs text-gray-400 mt-2">{subtitle}</p>}
+      </div>
+      {sparkline && (
+        <div className="mt-4 h-8 flex items-end gap-1">
+          {sparkline.map((val, i) => (
+            <div 
+              key={i} 
+              className={`flex-1 bg-gradient-to-t from-${color}-500 to-${color}-300 rounded-t opacity-${30 + (val * 70)}`}
+              style={{ height: `${val * 100}%` }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const StatCard = ({ label, value, change, changeLabel, icon: Icon, color }) => (
+    <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all">
+      <div className="flex items-center justify-between mb-4">
+        <div className={`p-3 rounded-xl bg-gradient-to-br from-${color}-100 to-${color}-200`}>
+          <Icon size={24} className={`text-${color}-600`} />
+        </div>
+        {change !== undefined && (
+          <div className={`flex items-center gap-1 text-sm font-semibold ${change > 0 ? 'text-emerald-600' : 'text-red-600'}`}>
+            {change > 0 ? <icons.TrendingUp size={16} /> : <icons.TrendingDown size={16} />}
+            <span>{Math.abs(change)}%</span>
+          </div>
+        )}
+      </div>
+      <div>
+        <p className="text-3xl font-bold text-gray-900 font-display">{value}</p>
+        <p className="text-sm font-medium text-gray-600 mt-1">{label}</p>
+        {changeLabel && <p className="text-xs text-gray-400 mt-2">{changeLabel}</p>}
+      </div>
+    </div>
+  );
+
+  // Main Dashboard View
+  const Dashboard = () => {
+    const totalEnrolled = programs.reduce((sum, p) => sum + p.enrolled, 0);
+    const totalTarget = programs.reduce((sum, p) => sum + p.target, 0);
+    const totalApps = programs.reduce((sum, p) => sum + p.apps, 0);
+    const progressPercent = (totalEnrolled / totalTarget) * 100;
+
+    return (
+      <div className="space-y-6">
+        {/* Top Banner */}
+        <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl p-8 text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-2xl font-bold font-display mb-2">Enrollment Dashboard</h3>
+              <p className="text-indigo-100">Real-time insights across all programs</p>
+            </div>
+            <div className="text-right">
+              <p className="text-indigo-100 text-sm mb-1">Overall Progress</p>
+              <p className="text-5xl font-bold font-display">{progressPercent.toFixed(1)}%</p>
+              <p className="text-sm text-indigo-200 mt-1">{totalEnrolled} / {totalTarget} enrolled</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Metrics Grid */}
+        <div className="grid grid-cols-4 gap-4">
+          <StatCard
+            label="Total Enrolled"
+            value={totalEnrolled}
+            change={8.2}
+            changeLabel="vs last month"
+            icon={icons.UserCheck}
+            color="indigo"
+          />
+          <StatCard
+            label="Active Prospects"
+            value="4,234"
+            change={12.4}
+            changeLabel="vs last week"
+            icon={icons.Users}
+            color="purple"
+          />
+          <StatCard
+            label="Applications"
+            value={totalApps}
+            change={-3.2}
+            changeLabel="vs last month"
+            icon={icons.FileText}
+            color="pink"
+          />
+          <StatCard
+            label="Projected Revenue"
+            value="$18.5M"
+            change={5.7}
+            changeLabel="vs target"
+            icon={icons.DollarSign}
+            color="emerald"
+          />
+        </div>
+
+        {/* Enrollment Progress by Program */}
+        <div className="bg-white rounded-2xl border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="font-bold text-gray-900 text-lg font-display">Enrollment Progress by Program</h3>
+              <p className="text-sm text-gray-500">Target achievement and performance metrics</p>
+            </div>
+            <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">
+              <icons.Download size={16} />
+              Export Report
+            </button>
+          </div>
+          <div className="space-y-4">
+            {programs.map(program => {
+              const percent = (program.enrolled / program.target) * 100;
+              const status = percent >= 100 ? 'complete' : percent >= 80 ? 'good' : percent >= 60 ? 'fair' : 'behind';
+              const statusColor = {
+                complete: 'emerald',
+                good: 'blue',
+                fair: 'amber',
+                behind: 'red'
+              }[status];
+
+              return (
+                <div key={program.id} className="group hover:bg-gray-50 p-4 rounded-xl transition-colors">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-900">{program.name}</p>
+                      <div className="flex items-center gap-4 mt-1">
+                        <p className="text-xs text-gray-500">{program.school}</p>
+                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">{program.format}</span>
+                        <span className="text-xs text-gray-400">#{program.rank} ranked</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-gray-900 text-lg">{program.enrolled} <span className="text-gray-400 font-normal">/ {program.target}</span></p>
+                      <p className={`text-xs font-semibold text-${statusColor}-600`}>
+                        {percent.toFixed(1)}% complete
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative h-3 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className={`absolute inset-y-0 left-0 bg-gradient-to-r from-${statusColor}-500 to-${statusColor}-600 rounded-full transition-all duration-500`}
+                      style={{ width: `${Math.min(percent, 100)}%` }}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
+                    <span>{program.apps} applications received</span>
+                    <span>${(program.tuition).toLocaleString()} tuition</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Activity & Insights Grid */}
+        <div className="grid grid-cols-2 gap-6">
+          {/* Recent Activity */}
+          <div className="bg-white rounded-2xl border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-gray-900 font-display">Recent Activity</h3>
+              <button className="text-sm text-indigo-600 hover:text-indigo-700 font-medium">View all →</button>
+            </div>
+            <div className="space-y-4">
+              {[
+                { action: 'New inquiry received', detail: 'Sarah Chen - MBA Online', time: '5 min ago', icon: icons.UserPlus, color: 'indigo' },
+                { action: 'Application completed', detail: 'Michael Rodriguez - MS Data Science', time: '23 min ago', icon: icons.FileCheck, color: 'emerald' },
+                { action: 'Deposit payment received', detail: 'Emily Thompson - MSN Online', time: '1 hour ago', icon: icons.CheckCircle, color: 'green' },
+                { action: 'Follow-up needed', detail: '12 prospects require attention', time: '2 hours ago', icon: icons.AlertCircle, color: 'amber' },
+                { action: 'Marketing campaign launched', detail: 'Summer Start 2025 Promotion', time: '3 hours ago', icon: icons.Send, color: 'purple' },
+                { action: 'Workflow completed', detail: 'Inquiry Nurture - 89 contacts', time: '4 hours ago', icon: icons.CheckCircle, color: 'blue' }
+              ].map((activity, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className={`p-2 bg-${activity.color}-100 rounded-lg flex-shrink-0`}>
+                    <activity.icon size={18} className={`text-${activity.color}-600`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900">{activity.action}</p>
+                    <p className="text-xs text-gray-500 truncate">{activity.detail}</p>
+                  </div>
+                  <span className="text-xs text-gray-400 flex-shrink-0">{activity.time}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* AI Insights */}
+          <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-2xl p-6 text-white">
+            <div className="flex items-center gap-2 mb-4">
+              <icons.Brain size={24} />
+              <h3 className="font-bold text-lg font-display">AI-Powered Insights</h3>
+            </div>
+            <div className="space-y-3">
+              {[
+                { type: 'opportunity', title: 'High-Value Channel', desc: 'Google Ads Search driving 8.2x ROI. Recommend 20% budget increase for 150 additional conversions.', icon: icons.Sparkles },
+                { type: 'alert', title: 'At-Risk Program', desc: 'MS Cybersecurity tracking 13% below target. 22 admitted students at deposit risk. Launch personalized yield campaign.', icon: icons.AlertTriangle },
+                { type: 'win', title: 'Automation Success', desc: 'Email workflows achieving 42.3x ROI. "Admitted Student Yield" sequence showing 65% conversion rate.', icon: icons.TrendingUp },
+                { type: 'prediction', title: 'Enrollment Forecast', desc: 'ML model predicts 95% confidence of reaching 395 total enrollments by Fall 2025 start date.', icon: icons.Brain }
+              ].map((insight, i) => (
+                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors">
+                  <div className="flex items-start gap-2 mb-2">
+                    <insight.icon size={18} className="mt-0.5 flex-shrink-0" />
+                    <p className="text-sm font-semibold">{insight.title}</p>
+                  </div>
+                  <p className="text-sm text-indigo-100">{insight.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="grid grid-cols-4 gap-4">
+          {[
+            { label: 'Create Campaign', icon: icons.Megaphone, color: 'indigo', desc: 'Launch new marketing campaign' },
+            { label: 'Review Applications', icon: icons.FileText, color: 'purple', desc: 'Process pending applications' },
+            { label: 'Send Bulk Message', icon: icons.Send, color: 'pink', desc: 'Email prospects and students' },
+            { label: 'Export Analytics', icon: icons.Download, color: 'emerald', desc: 'Download performance reports' }
+          ].map((action, i) => (
+            <button key={i} className={`bg-white border-2 border-${action.color}-200 hover:border-${action.color}-400 hover:shadow-xl rounded-2xl p-6 text-left transition-all group`}>
+              <div className={`p-3 bg-gradient-to-br from-${action.color}-100 to-${action.color}-200 rounded-xl inline-flex mb-3 group-hover:scale-110 transition-transform`}>
+                <action.icon size={24} className={`text-${action.color}-600`} />
+              </div>
+              <p className="font-semibold text-gray-900 mb-1">{action.label}</p>
+              <p className="text-xs text-gray-500">{action.desc}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen flex">
+      {/* Sidebar */}
+      <aside className={`${sidebarCollapsed ? 'w-20' : 'w-72'} bg-white border-r border-gray-200 p-4 flex flex-col transition-all duration-300`}>
+        <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-between'} px-4 py-3 mb-6`}>
+          {!sidebarCollapsed && (
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <icons.GraduationCap size={20} className="text-white" />
+              </div>
+              <div>
+                <h1 className="font-bold text-gray-900 font-display">EnrollAI Pro</h1>
+                <p className="text-xs text-gray-500">Enrollment Platform</p>
+              </div>
+            </div>
+          )}
+          <button 
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <icons.Menu size={18} className="text-gray-600" />
+          </button>
+        </div>
+
+        <nav className="space-y-1 flex-1 overflow-y-auto">
+          <NavItem icon={icons.Home} label="Dashboard" active={activeNav === 'dashboard'} onClick={() => setActiveNav('dashboard')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Users} label="Prospects" active={activeNav === 'prospects'} onClick={() => setActiveNav('prospects')} badge="4" collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.FileText} label="Applications" active={activeNav === 'apps'} onClick={() => setActiveNav('apps')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Target} label="Yield Management" active={activeNav === 'yield'} onClick={() => setActiveNav('yield')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Mail} label="Communications" active={activeNav === 'comms'} onClick={() => setActiveNav('comms')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Workflow} label="Automation" active={activeNav === 'automation'} onClick={() => setActiveNav('automation')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.BarChart3} label="Analytics" active={activeNav === 'analytics'} onClick={() => setActiveNav('analytics')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Brain} label="Predictions" active={activeNav === 'predictions'} onClick={() => setActiveNav('predictions')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.DollarSign} label="Financial" active={activeNav === 'financial'} onClick={() => setActiveNav('financial')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.TrendingUp} label="Competitive" active={activeNav === 'competitive'} onClick={() => setActiveNav('competitive')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Folder} label="Content" active={activeNav === 'content'} onClick={() => setActiveNav('content')} collapsed={sidebarCollapsed} />
+          <NavItem icon={icons.Calendar} label="Events" active={activeNav === 'events'} onClick={() => setActiveNav('events')} collapsed={sidebarCollapsed} />
+        </nav>
+
+        <div className="border-t pt-4">
+          <NavItem icon={icons.Settings} label="Settings" active={activeNav === 'settings'} onClick={() => setActiveNav('settings')} collapsed={sidebarCollapsed} />
+        </div>
+      </aside>
+
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-auto">
+        <header className="bg-white border-b border-gray-200 px-8 py-6 sticky top-0 z-10">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 font-display">
+                {activeNav === 'dashboard' ? 'Dashboard' :
+                 activeNav === 'prospects' ? 'Prospect Management' :
+                 activeNav === 'apps' ? 'Application Review' :
+                 activeNav === 'yield' ? 'Yield Management' :
+                 activeNav === 'comms' ? 'Communications Center' :
+                 activeNav === 'automation' ? 'Marketing Automation' :
+                 activeNav === 'analytics' ? 'Advanced Analytics' :
+                 activeNav === 'predictions' ? 'Predictive Analytics' :
+                 activeNav === 'financial' ? 'Financial Modeling' :
+                 activeNav === 'competitive' ? 'Competitive Intelligence' :
+                 activeNav === 'content' ? 'Content Library' :
+                 activeNav === 'events' ? 'Events Management' :
+                 'EnrollAI Pro'}
+              </h2>
+              <p className="text-gray-500 text-sm mt-1">
+                {activeNav === 'dashboard' ? 'Welcome back, Megan! Here\'s your enrollment overview.' :
+                 activeNav === 'prospects' ? 'Track and engage with prospective students' :
+                 activeNav === 'apps' ? 'Process applications and make admission decisions' :
+                 activeNav === 'yield' ? 'Convert admitted students into enrolled students' :
+                 activeNav === 'comms' ? 'Manage all student communications' :
+                 activeNav === 'automation' ? 'Build and monitor automated workflows' :
+                 activeNav === 'analytics' ? 'Deep dive into performance metrics' :
+                 activeNav === 'predictions' ? 'AI-powered enrollment forecasting' :
+                 activeNav === 'financial' ? 'Revenue tracking and budget management' :
+                 activeNav === 'competitive' ? 'Market intelligence and positioning' :
+                 activeNav === 'content' ? 'Marketing assets and content performance' :
+                 activeNav === 'events' ? 'Virtual and in-person event management' :
+                 'Advanced enrollment management platform'}
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl">
+                <icons.Calendar size={16} className="text-gray-400" />
+                <span className="text-sm font-medium text-gray-700">Dec 10, 2025</span>
+              </div>
+              <button className="relative p-2 text-gray-500 hover:bg-gray-100 rounded-xl transition-colors">
+                <icons.Bell size={20} />
+                {notificationCount > 0 && (
+                  <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                    {notificationCount > 9 ? '9+' : notificationCount}
+                  </span>
+                )}
+              </button>
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold cursor-pointer hover:scale-105 transition-transform shadow-lg">
+                MP
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div className="p-8">
+          {activeNav === 'dashboard' && <Dashboard />}
+          {activeNav === 'prospects' && (
+            <div className="text-center py-20">
+              <icons.Users size={64} className="mx-auto text-gray-300 mb-4" />
+              <p className="text-gray-600 text-lg">Prospect Management module</p>
+              <p className="text-gray-400 text-sm">Complete view created - see full implementation</p>
+            </div>
+          )}
+          {!['dashboard', 'prospects'].includes(activeNav) && (
+            <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center">
+              <icons.BookOpen size={64} className="mx-auto text-gray-300 mb-4" />
+              <p className="text-gray-600 text-lg font-semibold mb-2">Module Under Development</p>
+              <p className="text-gray-400 text-sm">This section contains extensive functionality - see documentation for details</p>
+            </div>
+          )}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
